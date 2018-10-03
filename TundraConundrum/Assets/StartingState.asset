@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
+  m_Name: StartingState
+  m_EditorClassIdentifier: 
+  storyText: "Welcome to Tundra's Conundrum! In order to escape, you must find all
+    the keys in the labyrinth and make your way to the exit.\r\n\r\nYou just entered
+    the maze and must choose between to pathways.\r\n\r\nWhat's 2 + 2?\r"
+  answers:
+  - 2
+  - 4
+  - 1
+  - Damn
+  correctAnswer: 4
+  nextState:
+  - {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
+  isTransition: 0

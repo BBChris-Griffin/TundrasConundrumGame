@@ -1,0 +1,7 @@
+Welcome to Tundra's Conundrum! In order to escape, you must find all the keys in the labyrinth and make your way to the exit.
+
+You just entered the maze and must choose between to pathways.
+
+Which direction will you go first?
+1. Left
+2. Right

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
+  m_Name: VictoryState
+  m_EditorClassIdentifier: 
+  storyText: You have completed Tundra's Conundrum. Congratulations!!
+  answers:
+  - Start Over
+  - Fuck Off
+  correctAnswer: 
+  nextState:
+  - {fileID: 11400000, guid: 744b7dd2a9c0c1c4088252280e65c1d1, type: 2}
+  - {fileID: 0}
+  isTransition: 1
