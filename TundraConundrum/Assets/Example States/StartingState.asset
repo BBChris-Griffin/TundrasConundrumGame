@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
+  m_Name: StartingState
+  m_EditorClassIdentifier: 
+  storyText: 'Welcome to the castle of Conundrum. I am thy host, Tundra. I hope you''re
+    ready for the worst...
+
+
+    The great ice castle opens and the immediate hallway immediately divides into
+    two. Which way will you choose?'
+  answers:
+  - Left
+  - Right
+  correctAnswer: 
+  nextState:
+  - {fileID: 11400000, guid: 3b2cde9c75db08543a6150e764e6e7b9, type: 2}
+  - {fileID: 11400000, guid: 744b7dd2a9c0c1c4088252280e65c1d1, type: 2}
+  isTransition: 1

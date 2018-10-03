@@ -7,6 +7,7 @@ public class AdventureGame : MonoBehaviour {
 
     [SerializeField] Text textComponent;
     public State startingState;
+    public State failState;
     private State currState;
 
 	// Use this for initialization
@@ -47,12 +48,22 @@ public class AdventureGame : MonoBehaviour {
                 currState = currState.GetNextState()[0];
                 SetupText();
             }
+            else
+            {
+                currState = failState;
+                SetupText();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (currState.GetAnswers()[1] == currState.GetCorrectAnswer())
             {
                 currState = currState.GetNextState()[0];
+                SetupText();
+            }
+            else
+            {
+                currState = failState;
                 SetupText();
             }
         }
@@ -63,12 +74,22 @@ public class AdventureGame : MonoBehaviour {
                 currState = currState.GetNextState()[0];
                 SetupText();
             }
+            else
+            {
+                currState = failState;
+                SetupText();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             if (currState.GetAnswers()[3] == currState.GetCorrectAnswer())
             {
                 currState = currState.GetNextState()[0];
+                SetupText();
+            }
+            else
+            {
+                currState = failState;
                 SetupText();
             }
         }
@@ -83,11 +104,8 @@ public class AdventureGame : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            //currState = currState.GetNextState()[1];
-            //SetupText();
-
-            // Temporary
-            Application.Quit();
+            currState = currState.GetNextState()[1];
+            SetupText();      
         }
     }
 }

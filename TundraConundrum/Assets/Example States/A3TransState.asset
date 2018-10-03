@@ -9,17 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
-  m_Name: StartingState
+  m_Name: A3TransState
   m_EditorClassIdentifier: 
-  storyText: "Welcome to Tundra's Conundrum! In order to escape, you must find all
-    the keys in the labyrinth and make your way to the exit.\r\n\r\nYou just entered
-    the maze and must choose between to pathways.\r\n\r\nWhat's 2 + 2?\r"
+  storyText: You find another fork in the metaphorical road. On the right, is the
+    end (like forreal). On the left... dude, just go right.
   answers:
-  - 2
-  - 4
-  - 1
-  - Damn
-  correctAnswer: 4
+  - Left
+  - Right
+  correctAnswer: 
   nextState:
+  - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
   - {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
-  isTransition: 0
+  isTransition: 1

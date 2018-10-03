@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
+  m_Name: A2RightState
+  m_EditorClassIdentifier: 
+  storyText: "You run into a great beast. The only way to beat him is with simple
+    math, my guy...\n\nWhat's 2 + 2?\r"
+  answers:
+  - 2
+  - 4
+  - 1
+  - Damn
+  correctAnswer: 4
+  nextState:
+  - {fileID: 11400000, guid: 879c2359eb575654f9f915537cf55d29, type: 2}
+  - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
+  isTransition: 0

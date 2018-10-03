@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
+  m_Name: A2LeftState
+  m_EditorClassIdentifier: 
+  storyText: 'As soon as you walk foward, the floor begins to crack. You decide to
+    use math to find the exact amount of weight per square inch to apply to the floor...
+    but fuck all that.
+
+
+    What is the square root of 4, my guy?'
+  answers:
+  - 8
+  - 4
+  - 0
+  - 2
+  correctAnswer: 2
+  nextState:
+  - {fileID: 11400000, guid: bef4e058b10492c4db52a52343675654, type: 2}
+  - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
+  isTransition: 0
