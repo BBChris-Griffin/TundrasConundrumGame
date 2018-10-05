@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AdventureGame.cs" />
+    <Compile Include="Assets\Scripts\AnswerClick.cs" />
     <Compile Include="Assets\Scripts\State.cs" />
     <None Include="Assets\Scripts\FirstStateofAdventure.txt" />
     <Reference Include="UnityEditor.StandardEvents">

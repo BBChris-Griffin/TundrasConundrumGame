@@ -8,104 +8,69 @@ public class AdventureGame : MonoBehaviour {
     [SerializeField] Text textComponent;
     public State startingState;
     public State failState;
-    private State currState;
+    public GameObject answerButton;
+    public GameObject startPoint;
+    public float buttonOffset;
 
-	// Use this for initialization
-	void Start ()
+    private State currState;
+    private List<GameObject> buttons;
+
+    // Use this for initialization
+    void Start ()
     {
+        buttons = new List<GameObject>();
         currState = startingState;
         SetupText();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if(!currState.GetIsTransition())
-        {
-            QuestionControls();
-        }
-        else
-        {
-            TransitionControls();
-        }
+	
 	}
 
-    private void SetupText()
+    public void SetupText()
     {
         textComponent.text = currState.GetStoryText() + "\n\n";
-        for(int i = 0; i < currState.GetAnswers().Length; i++)
+
+        if(buttons.Count != 0)
         {
-            textComponent.text += (i + 1) + ". " + currState.GetAnswers()[i] + "\n";
+            for(int i = 0; i < buttons.Count; i++)
+            {
+                Destroy(buttons[i]);
+            }
+            buttons.Clear();
         }
+
+        for (int i = 0; i < currState.GetAnswers().Length; i++)
+        {
+            GameObject answer = Instantiate(answerButton, startPoint.transform).gameObject;
+            answer.transform.position = new Vector3(startPoint.transform.position.x + (buttonOffset * i) / currState.GetAnswers().Length, 
+                startPoint.transform.position.y, startPoint.transform.position.z);
+            answer.GetComponentInChildren<Text>().text = currState.GetAnswers()[i];
+            buttons.Add(answer);
+        }
+
     }
 
-    private void QuestionControls()
+    public State GetState()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if(currState.GetAnswers()[0] == currState.GetCorrectAnswer())
-            {
-                currState = currState.GetNextState()[0];
-                SetupText();
-            }
-            else
-            {
-                currState = failState;
-                SetupText();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (currState.GetAnswers()[1] == currState.GetCorrectAnswer())
-            {
-                currState = currState.GetNextState()[0];
-                SetupText();
-            }
-            else
-            {
-                currState = failState;
-                SetupText();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (currState.GetAnswers()[2] == currState.GetCorrectAnswer())
-            {
-                currState = currState.GetNextState()[0];
-                SetupText();
-            }
-            else
-            {
-                currState = failState;
-                SetupText();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (currState.GetAnswers()[3] == currState.GetCorrectAnswer())
-            {
-                currState = currState.GetNextState()[0];
-                SetupText();
-            }
-            else
-            {
-                currState = failState;
-                SetupText();
-            }
-        }
+        return currState;
     }
 
-    private void TransitionControls()
+    public State GetFailState()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            currState = currState.GetNextState()[0];
-            SetupText();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            currState = currState.GetNextState()[1];
-            SetupText();      
-        }
+        return failState;
     }
+
+    public void setState(State state)
+    {
+        currState = state;
+    }
+
+    public List<GameObject> GetButtons()
+    {
+        return buttons;
+    }
+
 }
