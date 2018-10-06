@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
   m_Name: NawNiggaState
   m_EditorClassIdentifier: 
-  storyText: Naw, nigga! Fuck you mean?! Run that shit back!
+  storyText: Naw, fam! Resurrection!
   answers:
-  - Run that shit back
-  - Run that shit back
+  - Resurrection!
+  - Resurrection!
   correctAnswer: 
   nextState:
   - {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}

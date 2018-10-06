@@ -11,10 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
   m_Name: FailState
   m_EditorClassIdentifier: 
-  storyText: "You fucked up, my guy. \nYou're dead as shit."
+  storyText: "You screwed up, my guy. \nYou're dead. Not like, a little bit dead.
+    But, a lot of dead. Deaderiffic."
   answers:
   - Start Over
-  - Be a bitch
+  - Let me die
   correctAnswer: 
   nextState:
   - {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}

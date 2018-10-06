@@ -14,7 +14,7 @@ MonoBehaviour:
   storyText: You have completed Tundra's Conundrum. Congratulations!!
   answers:
   - Start Over
-  - Fuck Off
+  - I'm done, fam
   correctAnswer: 
   nextState:
   - {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}

@@ -20,7 +20,7 @@ MonoBehaviour:
   - Yep
   - No
   - I don't think so
-  - Nigga, what?
+  - Bruh, what?
   correctAnswer: Yep
   nextState:
   - {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
