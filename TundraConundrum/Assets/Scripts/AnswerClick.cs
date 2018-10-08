@@ -26,15 +26,15 @@ public class AnswerClick : MonoBehaviour {
                 game.setState(game.GetFailState());
                 game.SetupText();
             }
-        }     
+        }
         else
         {
             if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetAnswers()[0])
-            {             
+            {
                 game.setState(game.GetState().GetNextState()[0]);
                 game.SetupText();
             }
-            else 
+            else
             {
                 game.setState(game.GetState().GetNextState()[1]);
                 game.SetupText();

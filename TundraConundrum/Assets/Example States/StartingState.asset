@@ -25,3 +25,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b2cde9c75db08543a6150e764e6e7b9, type: 2}
   - {fileID: 11400000, guid: 744b7dd2a9c0c1c4088252280e65c1d1, type: 2}
   isTransition: 1
+  hints:
+  - I hear "Right" is easier...

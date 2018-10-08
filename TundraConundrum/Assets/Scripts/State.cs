@@ -10,6 +10,7 @@ public class State : ScriptableObject {
     [SerializeField] string correctAnswer;
     [SerializeField] State[] nextState;
     [SerializeField] bool isTransition;
+    [SerializeField] string[] hints;
 
     public string GetStoryText()
     {
@@ -34,5 +35,10 @@ public class State : ScriptableObject {
     public bool GetIsTransition()
     {
         return isTransition;
+    }
+
+    public string[] GetHints()
+    {
+      return hints;
     }
 }

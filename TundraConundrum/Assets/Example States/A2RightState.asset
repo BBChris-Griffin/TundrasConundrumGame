@@ -23,3 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 879c2359eb575654f9f915537cf55d29, type: 2}
   - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
   isTransition: 0
+  hints:
+  - Just like adding them

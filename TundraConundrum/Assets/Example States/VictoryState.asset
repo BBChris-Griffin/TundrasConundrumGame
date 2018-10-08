@@ -20,3 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}
   - {fileID: 11400000, guid: 457bbdd278bc82747acdea1ee78ea732, type: 2}
   isTransition: 1
+  hints:
+  - Bet you can't do it again...

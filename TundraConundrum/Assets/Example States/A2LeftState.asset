@@ -27,3 +27,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bef4e058b10492c4db52a52343675654, type: 2}
   - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
   isTransition: 0
+  hints:
+  - In this case, it's like dividing by two
+  - 2 to the power of 2 is 4...

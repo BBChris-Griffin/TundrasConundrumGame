@@ -15,14 +15,16 @@ MonoBehaviour:
     you must answer this simple question.
 
 
-    Did George Bush do 9/11?'
+    Is water wet?'
   answers:
   - Yep
   - No
   - I don't think so
   - Bruh, what?
-  correctAnswer: Yep
+  correctAnswer: Bruh, what?
   nextState:
   - {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
   - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
   isTransition: 0
+  hints:
+  - Best not to answer
