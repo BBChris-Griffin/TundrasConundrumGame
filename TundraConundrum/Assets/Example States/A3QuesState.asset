@@ -11,20 +11,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
   m_Name: A3QuesState
   m_EditorClassIdentifier: 
-  storyText: 'You meet the smartest man alive. He tells you that before you proceed,
-    you must answer this simple question.
+  storyText: 'You meet the Japanese man . He tells you that before you proceed, you
+    must answer this simple question.
 
 
-    Is water wet?'
+    What does "Arigato" mean in English?'
   answers:
-  - Yep
-  - No
+  - Thank you
+  - Go away
   - I don't think so
   - Bruh, what?
-  correctAnswer: Bruh, what?
+  correctAnswer: Thank you
   nextState:
   - {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
   - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
   isTransition: 0
   hints:
-  - Best not to answer
+  - Don't forget to be grateful
