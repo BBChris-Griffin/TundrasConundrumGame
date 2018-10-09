@@ -12,6 +12,22 @@ public class State : ScriptableObject {
     [SerializeField] bool isTransition;
     [SerializeField] string[] hints;
 
+    public State(string question, string[] answers, string correctAnswer, State[] nextState,
+                  bool isTransition, string[] hints)
+    {
+        this.storyText = question;
+        this.answers = answers;
+        this.correctAnswer = correctAnswer;
+        this.nextState = nextState;
+        this.isTransition = isTransition;
+        this.hints = hints;
+    }
+
+    public void SetNextState()
+    {
+        this.nextState = nextState;
+    }
+
     public string GetStoryText()
     {
         return storyText;
