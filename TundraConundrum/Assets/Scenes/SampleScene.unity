@@ -1346,7 +1346,8 @@ MonoBehaviour:
     type: 2}
   startPoint: {fileID: 1064885587}
   buttonOffset: 700
-  initTransButtonOffset: 100
+  init2ButtonOffset: 100
+  init3ButtonOffset: 50
   hintText: {fileID: 215117754}
 --- !u!4 &1738337366
 Transform:

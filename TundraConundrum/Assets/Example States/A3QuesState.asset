@@ -20,7 +20,6 @@ MonoBehaviour:
   - Thank you
   - Go away
   - I don't think so
-  - Bruh, what?
   correctAnswer: Thank you
   nextState:
   - {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
