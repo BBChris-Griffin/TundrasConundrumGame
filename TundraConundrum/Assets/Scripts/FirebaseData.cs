@@ -23,7 +23,7 @@ public class FirebaseData : MonoBehaviour {
     void GetData(string userID, string roomID)
     {
         Firebase firebase = Firebase.CreateNew("https://tundrasconundrum-31ea5.firebaseio.com", "");
-        Firebase user = firebase.Child("users");
+        Firebase user = firebase.Child("users").Child(userID).Child("rooms").Child(roomID);
         user.OnGetSuccess += GetOKHandler;
         user.GetValue("print=pretty");
         user.OnGetSuccess -= GetOKHandler;
@@ -43,5 +43,7 @@ public class FirebaseData : MonoBehaviour {
             {
                 Debug.Log(key + " = " + dict[key].ToString());
             }
+
+
     }
 }
