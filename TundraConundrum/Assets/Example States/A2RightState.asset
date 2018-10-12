@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyText: "You run into a great beast. The only way to beat him is with simple
     math, my guy...\n\nWhat's 2 * 2?\r"
+  roomName: Holy Crap
   answers:
   - 2
   - 4

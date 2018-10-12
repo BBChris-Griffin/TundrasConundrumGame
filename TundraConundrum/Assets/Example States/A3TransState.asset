@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyText: You find another fork in the metaphorical road. On the right, is the
     end (like forreal). On the left... dude, just go right.
+  roomName: Holy Crap
   answers:
   - Left
   - Right

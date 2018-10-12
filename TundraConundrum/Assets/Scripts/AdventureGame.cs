@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class AdventureGame : MonoBehaviour {
 
+    [SerializeField] Text roomTitle;
     [SerializeField] Text textComponent;
     public State startingState;
     public State failState;
@@ -26,6 +27,7 @@ public class AdventureGame : MonoBehaviour {
         buttons = new List<GameObject>();
         displayHint = false;
         hintText.text = "";
+        roomTitle.text = startingState.GetRoomTitle();
         currState = startingState;
         SetupText();
     }

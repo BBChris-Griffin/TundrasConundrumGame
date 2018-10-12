@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyText: "You screwed up, my guy. \nYou're dead. Not like, a little bit dead.
     But, a lot of dead. Deaderiffic."
+  roomName: Holy Crap
   answers:
   - Start Over
   - Let me die

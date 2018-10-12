@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: NawFamState
   m_EditorClassIdentifier: 
   storyText: Naw, fam! Resurrection!
+  roomName: Holy Crap
   answers:
   - Resurrection!
   - Resurrection!
