@@ -20,10 +20,12 @@ public class AdventureGame : MonoBehaviour {
     private State currState;
     private List<GameObject> buttons;
     private bool displayHint;
+    private int currentHint;
     private bool firebaseUsed;
     // Use this for initialization
     void Start ()
     {
+        currentHint = 0;
         firebaseUsed = false;
         buttons = new List<GameObject>();
         displayHint = false;
@@ -37,12 +39,9 @@ public class AdventureGame : MonoBehaviour {
 	void Update ()
     {
         CheckForFirebaseState();
-        if(displayHint)
+        if(currState.GetHints().Length != 0)
         {
-            if(currState.GetHints().Length != 0)
-            {
-              hintText.text = currState.GetHints()[0];
-            }
+          hintText.text = currState.GetHints()[currentHint];
         }
         else
         {
@@ -127,7 +126,14 @@ public class AdventureGame : MonoBehaviour {
 
     public void FlipHintMarker()
     {
-      displayHint = !displayHint;
+      if(currentHint == (currState.GetHints().Length - 1))
+      {
+          currentHint = 0;
+      }
+      else
+      {
+          currentHint++;
+      }
     }
 
 }

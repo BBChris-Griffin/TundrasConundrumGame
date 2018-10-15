@@ -20,10 +20,10 @@ public class FirebaseData : MonoBehaviour {
         startState = new State();
         GetData(roomID);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     void GetData(string roomID)
@@ -98,6 +98,7 @@ public class FirebaseData : MonoBehaviour {
 
             // Get Hints
             dict = (Dictionary<string, object>)puzzleDict["hints"];
+            hints.Add("");
             if (dict.ContainsKey("hint1"))
             {
                 hints.Add(dict["hint1"].ToString());
