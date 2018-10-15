@@ -15,10 +15,10 @@ MonoBehaviour:
     math, my guy...\n\nWhat's 2 * 2?\r"
   roomName: Holy Crap
   answers:
-  - 2
-  - 4
   - 1
   - Dang
+  - 2
+  - 4
   correctAnswer: 4
   nextState:
   - {fileID: 11400000, guid: 879c2359eb575654f9f915537cf55d29, type: 2}

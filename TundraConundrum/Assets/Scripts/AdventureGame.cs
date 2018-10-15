@@ -20,10 +20,11 @@ public class AdventureGame : MonoBehaviour {
     private State currState;
     private List<GameObject> buttons;
     private bool displayHint;
-
+    private bool firebaseUsed;
     // Use this for initialization
     void Start ()
     {
+        firebaseUsed = false;
         buttons = new List<GameObject>();
         displayHint = false;
         hintText.text = "";
@@ -35,6 +36,7 @@ public class AdventureGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        CheckForFirebaseState();
         if(displayHint)
         {
             if(currState.GetHints().Length != 0)
@@ -46,7 +48,22 @@ public class AdventureGame : MonoBehaviour {
         {
           hintText.text = "";
         }
-	  }
+	}
+
+    private void CheckForFirebaseState()
+    {
+        if (!firebaseUsed && this.gameObject.GetComponent<FirebaseData>())
+        {
+            FirebaseData firebase = this.gameObject.GetComponent<FirebaseData>();
+            if (firebase.GetStartState().GetRoomTitle() != "")
+            {
+                currState = firebase.GetStartState();
+                firebaseUsed = true;
+            }
+            roomTitle.text = currState.GetRoomTitle();
+            SetupText();
+        }
+    }
 
     public void SetupText()
     {
@@ -69,6 +86,11 @@ public class AdventureGame : MonoBehaviour {
         else if (currState.GetAnswers().Length == 3)
         {
             startPos = init3ButtonOffset;
+        }
+
+        if(!currState.GetIsTransition())
+        {
+            currState.ShuffleAnswers();
         }
 
         for (int i = 0; i < currState.GetAnswers().Length; i++)
