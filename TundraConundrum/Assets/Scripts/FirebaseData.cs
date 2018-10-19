@@ -62,8 +62,6 @@ public class FirebaseData : MonoBehaviour {
             puzzleStates.Add(newState);
         }
 
-        Debug.Log("Room " + puzzleStates[0].GetRoomTitle());
-
         dict = snapshot.Value<Dictionary<string, object>>();
         dict = (Dictionary<string, object>)dict["puzzles"];
         Dictionary<string, object> puzzleDict;
@@ -97,7 +95,14 @@ public class FirebaseData : MonoBehaviour {
             answers.Clear();
 
             // Get Hints
-            dict = (Dictionary<string, object>)puzzleDict["hints"];
+            foreach (string key in puzzleDict.Keys)
+            {
+                if(key == "hints")
+                {
+                    dict = (Dictionary<string, object>)puzzleDict["hints"];
+                }
+            }
+
             hints.Add("");
             if (dict.ContainsKey("hint1"))
             {
