@@ -20,6 +20,9 @@ public class AnswerClick : MonoBehaviour {
             {
                 game.setState(game.GetState().GetNextState()[0]);
                 game.SetupText();
+
+                // New Script
+                game.CreateItem();
             }
             else
             {

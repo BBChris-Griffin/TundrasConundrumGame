@@ -14,15 +14,18 @@ public class AdventureGame : MonoBehaviour {
     public float init2ButtonOffset;
     public float init3ButtonOffset;
     public Text hintText;
-
+    public GameObject item;
+    public GameObject itemInfo;
 
     private State currState;
     private List<GameObject> buttons;
     private bool displayHint;
+    private bool startWalking;
 
     // Use this for initialization
     void Start ()
     {
+        startWalking = false;
         buttons = new List<GameObject>();
         displayHint = false;
         hintText.text = "";
@@ -48,6 +51,7 @@ public class AdventureGame : MonoBehaviour {
 
     public void SetupText()
     {
+        startWalking = true;
         textComponent.text = currState.GetStoryText() + "\n\n";
 
         if(buttons.Count != 0)
@@ -106,4 +110,18 @@ public class AdventureGame : MonoBehaviour {
       displayHint = !displayHint;
     }
 
+    public bool StartWalking()
+    {
+        return startWalking;
+    }
+
+    public void StopWalking()
+    {
+        startWalking = false;
+    }
+
+    public void CreateItem()
+    {
+        Instantiate(item, itemInfo.transform.position, item.transform.rotation);
+    }
 }
