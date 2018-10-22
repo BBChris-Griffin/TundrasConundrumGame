@@ -26,13 +26,14 @@ public class ItemObtained : MonoBehaviour {
     private IEnumerator Congratulations()
     {
         Vector3 playerVelocity = player.GetComponent<Rigidbody>().velocity;
+        rgb.angularVelocity = new Vector3(0.0f, rotateValue, 0.0f);
+
         // Rise to the Visible Screen
         rgb.velocity = new Vector3(playerVelocity.x, playerVelocity.y + speed, playerVelocity.z);
         yield return new WaitForSeconds(moveTime);
         rgb.velocity = Vector3.zero;
         
         // Spin in Place
-        rgb.angularVelocity = new Vector3(0.0f, rotateValue, 0.0f);
         yield return new WaitForSeconds(displayTime);
         Destroy(this.gameObject);
 

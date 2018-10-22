@@ -132,5 +132,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   rotateValue: 2.5
-  moveTime: 2
+  moveTime: 1.85
   displayTime: 5

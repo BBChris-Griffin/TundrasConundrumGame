@@ -29,6 +29,8 @@ public class AnswerClick : MonoBehaviour {
                 game.setState(game.GetFailState());
                 game.SetupText();
             }
+
+            game.SetDirection(0);
         }
         else
         {
@@ -41,6 +43,15 @@ public class AnswerClick : MonoBehaviour {
             {
                 game.setState(game.GetState().GetNextState()[1]);
                 game.SetupText();
+            }
+
+            if(this.gameObject.GetComponentInChildren<Text>().text == "Left")
+            {
+                game.SetDirection(-1);
+            }
+            else if(this.gameObject.GetComponentInChildren<Text>().text == "Right")
+            {
+                game.SetDirection(1);
             }
         }
     }

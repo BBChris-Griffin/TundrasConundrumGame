@@ -16,15 +16,22 @@ public class AdventureGame : MonoBehaviour {
     public Text hintText;
     public GameObject item;
     public GameObject itemInfo;
+    public GameObject player;
 
     private State currState;
     private List<GameObject> buttons;
     private bool displayHint;
     private bool startWalking;
+    private int direction; // -1 means left, 0 means forward, 1 means right
+    private Quaternion itemRotation;
+
+    enum moveDirection { left, right, forward};
 
     // Use this for initialization
     void Start ()
     {
+        itemRotation = item.transform.rotation;
+        direction = 0;
         startWalking = false;
         buttons = new List<GameObject>();
         displayHint = false;
@@ -122,6 +129,18 @@ public class AdventureGame : MonoBehaviour {
 
     public void CreateItem()
     {
-        Instantiate(item, itemInfo.transform.position, item.transform.rotation);
+        GameObject newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
+        //newItem.transform.parent = player.transform;
+        //newItem.transform.rotation = Quaternion.Euler(new Vector3(0.0f, item.transform.rotation.y + player.transform.rotation.y, 45f));
+    }
+
+    public int GetDirection()
+    {
+        return direction;
+    }
+
+    public void SetDirection(int direction)
+    {
+        this.direction = direction;
     }
 }
