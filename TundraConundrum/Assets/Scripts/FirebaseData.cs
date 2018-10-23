@@ -9,22 +9,41 @@ public class FirebaseData : MonoBehaviour {
 
     //public string userID;
     public string roomID;
+    public bool webBuild;
 
     private State startState;
     private List<State> puzzleStates;
-
+    private bool set;
 
     // Use this for initialization
     void Awake () {
+        set = false;
         puzzleStates = new List<State>();
         startState = new State();
-        GetData(roomID);
-	}
+        if(!webBuild)
+        {
+            GetData(roomID);
+        }
+    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update ()
+    {
+        if(webBuild)
+        {
+            if (set)
+            {
+                GetData(roomID);
+                set = false;
+            }
+        }       
+    }
 
-	}
+    public void SetRoomID(string roomID)
+    {
+        this.roomID = roomID;
+        set = true;
+    }
 
     void GetData(string roomID)
     {
