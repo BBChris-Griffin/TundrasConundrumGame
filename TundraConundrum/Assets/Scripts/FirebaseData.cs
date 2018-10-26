@@ -36,7 +36,7 @@ public class FirebaseData : MonoBehaviour {
                 GetData(roomID);
                 set = false;
             }
-        }       
+        }
     }
 
     public void SetRoomID(string roomID)
@@ -47,7 +47,7 @@ public class FirebaseData : MonoBehaviour {
 
     void GetData(string roomID)
     {
-        Firebase firebase = Firebase.CreateNew("https://tundrasconundrum-31ea5.firebaseio.com", "");
+        Firebase firebase = Firebase.CreateNew("https://tundrasconundrum-6af20.firebaseio.com", "");
         //Firebase user = firebase.Child("rooms").Child(roomID);
         Firebase user = firebase;
         user.OnGetSuccess += GetDataHandler;
