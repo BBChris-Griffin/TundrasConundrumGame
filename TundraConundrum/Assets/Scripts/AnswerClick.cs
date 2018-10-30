@@ -23,7 +23,8 @@ public class AnswerClick : MonoBehaviour {
             }
             else
             {
-                game.setState(game.GetFailState());
+                //game.setState(game.GetFailState());
+                game.setState(game.GetState().GetNextState()[1]);
                 game.SetupText();
             }
         }

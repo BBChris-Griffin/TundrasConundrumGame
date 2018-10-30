@@ -10,14 +10,17 @@ public class FirebaseData : MonoBehaviour {
     //public string userID;
     public string roomID;
     public bool webBuild;
+    public State blankState;
 
     private State startState;
     private List<State> puzzleStates;
     private bool set;
+    private string firebaseID;
 
     // Use this for initialization
     void Awake () {
         set = false;
+        firebaseID = "https://tundrasconundrum-6af20.firebaseio.com";
         puzzleStates = new List<State>();
         startState = new State();
         if(!webBuild)
@@ -39,6 +42,11 @@ public class FirebaseData : MonoBehaviour {
         }
     }
 
+    public void SetFirebase(string firebaseID)
+    {
+        this.firebaseID = firebaseID;
+    }
+
     public void SetRoomID(string roomID)
     {
         this.roomID = roomID;
@@ -47,7 +55,7 @@ public class FirebaseData : MonoBehaviour {
 
     void GetData(string roomID)
     {
-        Firebase firebase = Firebase.CreateNew("https://tundrasconundrum-6af20.firebaseio.com", "");
+        Firebase firebase = Firebase.CreateNew(firebaseID, "");
         //Firebase user = firebase.Child("rooms").Child(roomID);
         Firebase user = firebase;
         user.OnGetSuccess += GetDataHandler;
@@ -70,9 +78,18 @@ public class FirebaseData : MonoBehaviour {
         // Get Room Name
         string roomName = dict["name"].ToString();
         startState.SetRoomTitle(roomName);
-
+        Debug.Log("here");
         // Get Puzzle ID
-        dict = (Dictionary<string, object>)dict["puzzles"];
+        try
+        {
+            dict = (Dictionary<string, object>)dict["puzzles"];
+        }
+        catch
+        {
+            // If no puzzle is in room, use blank state
+            puzzleStates.Add(blankState);
+        }
+
         foreach (string key in dict.Keys)
         {
             State newState = new State();
