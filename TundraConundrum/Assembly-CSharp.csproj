@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AdventureGame.cs" />
     <Compile Include="Assets\Scripts\AnswerClick.cs" />
+    <Compile Include="Assets\Scripts\CreateRoom.cs" />
     <Compile Include="Assets\Scripts\HintClick.cs" />
     <Compile Include="Assets\Scripts\ItemObtained.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
