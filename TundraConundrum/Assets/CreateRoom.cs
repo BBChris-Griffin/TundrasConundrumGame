@@ -9,19 +9,37 @@ public class CreateRoom : MonoBehaviour {
 	public State victoryState;
 	private State startState;
 	private AdventureGame game;
+	private Vector3 position;
 	// Use this for initialization
 	void Start () {
-		gameController = FindGameObjectWithTag("GameController");
+		GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
 		if(gameController != null)
 		{
 			game = gameController.GetComponent<AdventureGame>();
 		}
 		startState = game.startingState;
+		position = new Vector3(0, 0, 0);
+		InstantiateRoom();
 	}
 
-	void CreateRoom()
+	void InstantiateRoom()
 	{
 		State currState = startState;
-		
+		LevelOrderSearch(currState, position);
+
+	}
+
+	void LevelOrderSearch(State rootState, Vector3 currPosition)
+	{
+		if(rootState != null)
+		{
+			Instantiate(path, currPosition, Quaternion.identity);
+		}
+		else
+		{
+			return;
+		}
+		LevelOrderSearch(rootState.GetNextState()[0], currPosition + new Vector3(0, 1, 0));
+		LevelOrderSearch(rootState.GetNextState()[1], currPosition + new Vector3(0, 1, 0));
 	}
 }

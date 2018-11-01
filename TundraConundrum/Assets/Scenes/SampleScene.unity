@@ -1603,6 +1603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59edbd6542404fb2bd3296492610c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  path: {fileID: 1567007493366518, guid: bf121070015b141e4bbcc03fb1dbf3d4, type: 2}
+  failState: {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
+  victoryState: {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
 --- !u!1 &1805882693
 GameObject:
   m_ObjectHideFlags: 0
