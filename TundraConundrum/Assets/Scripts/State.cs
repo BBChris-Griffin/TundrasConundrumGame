@@ -54,9 +54,19 @@ public class State : ScriptableObject {
         this.nextState = nextState;
     }
 
+    public void SetANextState(State nextState, int index)
+    {
+        this.nextState[index] = nextState;
+    }
+
     public void SetNextStateID(string[] nextID)
     {
         this.nextStateID = nextID;
+    }
+
+    public string[] GetNextStateID()
+    {
+        return this.nextStateID;
     }
 
     public void SetID(string id)

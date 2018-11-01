@@ -16,9 +16,11 @@ public class FirebaseData : MonoBehaviour {
     private List<State> puzzleStates;
     private bool set;
     private string firebaseID;
+    private bool ready;
 
     // Use this for initialization
     void Awake () {
+        ready = false;
         set = false;
         firebaseID = "https://tundrasconundrum-6af20.firebaseio.com";
         puzzleStates = new List<State>();
@@ -26,6 +28,7 @@ public class FirebaseData : MonoBehaviour {
         if(!webBuild)
         {
             GetData(roomID);
+            ready = true;
         }
     }
 
@@ -38,6 +41,7 @@ public class FirebaseData : MonoBehaviour {
             {
                 GetData(roomID);
                 set = false;
+                ready = true;
             }
         }
     }
@@ -66,9 +70,6 @@ public class FirebaseData : MonoBehaviour {
 
     void GetDataHandler(Firebase sender, DataSnapshot snapshot)
     {
-        //Debug.Log("[OK] Get from key: <" + sender.FullKey + ">");
-        //Debug.Log("[OK] Raw Json: " + snapshot.RawJson);
-
         Dictionary<string, object> dict = snapshot.Value<Dictionary<string, object>>();
         List<string> keys = snapshot.Keys;
 
@@ -78,7 +79,6 @@ public class FirebaseData : MonoBehaviour {
         // Get Room Name
         string roomName = dict["name"].ToString();
         startState.SetRoomTitle(roomName);
-        Debug.Log("here");
         // Get Puzzle ID
         try
         {
@@ -98,16 +98,18 @@ public class FirebaseData : MonoBehaviour {
             puzzleStates.Add(newState);
         }
 
-        dict = snapshot.Value<Dictionary<string, object>>();
-        dict = (Dictionary<string, object>)dict["puzzles"];
+        Dictionary<string, object> saveDict = snapshot.Value<Dictionary<string, object>>();
+        saveDict = (Dictionary<string, object>)saveDict["puzzles"];
         Dictionary<string, object> puzzleDict;
         List<string> answers = new List<string>();
         List<string> hints = new List<string>();
+        List<string> transitions = new List<string>();
+        List<State> stateList = new List<State>();
 
         for (int i = 0; i < puzzleStates.Count; i++)
         {
-            puzzleDict = (Dictionary<string, object>)dict[puzzleStates[i].GetID()];
-
+            puzzleDict = (Dictionary<string, object>)saveDict[puzzleStates[i].GetID()];
+    
             // Get Questions
             puzzleStates[i].SetStoryText(puzzleDict["question"].ToString());
 
@@ -154,65 +156,64 @@ public class FirebaseData : MonoBehaviour {
             }
             puzzleStates[i].SetHints(hints.ToArray());
             hints.Clear();
-        }
-    }
-
-    void RetrieveData(DataSnapshot snapshot)
-    {
-        Dictionary<string, object> dict = snapshot.Value<Dictionary<string, object>>();
-        List<string> keys = snapshot.Keys;
-
-        string roomName = dict["name"].ToString();
-        startState.SetRoomTitle(roomName);
-        for (int i = 0; i < 2; i++)
-        {
-            dict = (Dictionary<string, object>)dict["puzzles"];
-            //startState.SetID(dict.);
-        }
-    }
-
-    void ParseDate(string snapShotData)
-    {
-        bool getPuzzleID = false;
-        bool getAnswers = false;
-        bool getHints = false;
-        bool getQuestion = false;
-        bool getStartPuzzle = true;
-        bool getNewPuzzle = false;
-        string[] firebaseData = snapShotData.Split('\n');
-        for(int i = 0; i < firebaseData.Length; i++)
-        {
-            if (getStartPuzzle)
+            
+            //Get Transitions
+            foreach (string key in puzzleDict.Keys)
             {
-                if (getPuzzleID)
+                if (key == "transitions")
                 {
-                    string[] temp = firebaseData[i].Split(' ');
-                    startState.SetID(temp[1]);
-                    Debug.Log("Id " + temp.Length);
-                    getPuzzleID = false;
+                    dict = (Dictionary<string, object>)puzzleDict["transitions"];
                 }
             }
-            if (firebaseData[i] == "  \"puzzles\" : {")
+
+            if (dict.ContainsKey("left"))
             {
-                getPuzzleID = true;
+                transitions.Add(dict["left"].ToString());
             }
-            else if (firebaseData[i] == "\"answers\" : {")
+            else
             {
-                getAnswers = true;
+                transitions.Add("null");
             }
-            else if (firebaseData[i] == "\"hints\" : {")
+            if (dict.ContainsKey("right"))
             {
-                getHints = true;
+                transitions.Add(dict["right"].ToString());
             }
-            else if (firebaseData[i] == "\"question\" : {")
+            else
             {
-                getQuestion = true;
+                transitions.Add("null");
             }
+
+            puzzleStates[i].SetNextStateID(transitions.ToArray());
+
+            for (int k = 0; k < 2; k++)
+            {
+                for (int j = 0; j < puzzleStates.Count; j++)
+                {
+                    if (puzzleStates[i].GetNextStateID()[k] == puzzleStates[j].GetID())
+                    {
+                        stateList.Add(puzzleStates[j]);
+                        break;
+                    }
+                    else if(puzzleStates[i].GetNextStateID()[k] == "null")
+                    {
+                        stateList.Add(puzzleStates[i]);
+                        break;
+                    }
+                }
+            }
+            puzzleStates[i].SetNextState(stateList.ToArray());
+            transitions.Clear();
+            stateList.Clear();
         }
     }
 
     public State GetStartState()
     {
         return puzzleStates[0];
+    }
+
+    public bool DataRetrieved()
+    {
+        return ready;
     }
 }

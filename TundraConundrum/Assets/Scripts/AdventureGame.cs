@@ -8,6 +8,7 @@ public class AdventureGame : MonoBehaviour {
     [SerializeField] Text roomTitle;
     [SerializeField] Text textComponent;
     public State startingState;
+    public State victoryState;
     public State failState;
     public GameObject answerButton;
     public GameObject startPoint;
@@ -54,10 +55,12 @@ public class AdventureGame : MonoBehaviour {
         if (!firebaseUsed && this.gameObject.GetComponent<FirebaseData>())
         {
             FirebaseData firebase = this.gameObject.GetComponent<FirebaseData>();
-            if (firebase.GetStartState().GetRoomTitle() != "")
+            if (firebase.DataRetrieved())
             {
                 currState = firebase.GetStartState();
                 firebaseUsed = true;
+                victoryState.SetANextState(currState, 0);
+                failState.SetANextState(currState, 0);
             }
             roomTitle.text = currState.GetRoomTitle();
             SetupText();
@@ -111,6 +114,11 @@ public class AdventureGame : MonoBehaviour {
     public State GetFailState()
     {
         return failState;
+    }
+
+    public State GetVictoryState()
+    {
+        return victoryState;
     }
 
     public void setState(State state)

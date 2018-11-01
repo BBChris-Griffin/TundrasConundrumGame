@@ -18,14 +18,29 @@ public class AnswerClick : MonoBehaviour {
         {
             if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetCorrectAnswer())
             {
-                game.setState(game.GetState().GetNextState()[0]);
-                game.SetupText();
+                if(game.GetState().GetNextState()[0] == game.GetState())
+                {
+                    game.setState(game.GetVictoryState());
+                    game.SetupText();
+                }
+                else
+                {
+                    game.setState(game.GetState().GetNextState()[0]);
+                    game.SetupText();
+                }            
             }
             else
             {
-                //game.setState(game.GetFailState());
-                game.setState(game.GetState().GetNextState()[1]);
-                game.SetupText();
+                if (game.GetState().GetNextState()[1] == game.GetState())
+                {
+                    game.setState(game.GetFailState());
+                    game.SetupText();
+                }
+                else
+                {
+                    game.setState(game.GetState().GetNextState()[1]);
+                    game.SetupText();
+                }
             }
         }
         else
