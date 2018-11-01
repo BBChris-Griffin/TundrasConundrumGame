@@ -13,6 +13,7 @@ public class AdventureGame : MonoBehaviour {
     public GameObject answerButton;
     public GameObject startPoint;
     public float buttonOffset;
+    public float init1ButtonOffset;
     public float init2ButtonOffset;
     public float init3ButtonOffset;
     public Text hintText;
@@ -81,6 +82,7 @@ public class AdventureGame : MonoBehaviour {
         }
 
         float startPos = 0.0f;
+        
         if(currState.GetAnswers().Length == 2)
         {
             startPos = init2ButtonOffset;
@@ -89,8 +91,12 @@ public class AdventureGame : MonoBehaviour {
         {
             startPos = init3ButtonOffset;
         }
+        else if (currState.GetAnswers().Length == 1)
+        {
+            startPos = init1ButtonOffset;
+        }
 
-        if(!currState.GetIsTransition())
+        if (!currState.GetIsTransition())
         {
             currState.ShuffleAnswers();
         }

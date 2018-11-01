@@ -1343,12 +1343,13 @@ MonoBehaviour:
   roomTitle: {fileID: 674179253}
   textComponent: {fileID: 382553728}
   startingState: {fileID: 11400000, guid: 79faa0d3be6103e49873f4ca9156d640, type: 2}
-  victoryState: {fileID: 11400000, guid: b433a797dd45c3b439a96abbb78f405a, type: 2}
-  failState: {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
+  victoryState: {fileID: 11400000, guid: 1eee4e5f9d9a34145bbd5072ca9b9153, type: 2}
+  failState: {fileID: 11400000, guid: cc196ba0b432be948b3ceeed727a05ce, type: 2}
   answerButton: {fileID: 1109579865485802, guid: feea3991866caa8498c5274440ba7df8,
     type: 2}
   startPoint: {fileID: 1064885587}
   buttonOffset: 700
+  init1ButtonOffset: 265
   init2ButtonOffset: 100
   init3ButtonOffset: 50
   hintText: {fileID: 215117754}
