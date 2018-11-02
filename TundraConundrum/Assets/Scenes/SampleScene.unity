@@ -595,6 +595,7 @@ Transform:
   - {fileID: 913077080}
   - {fileID: 372926028}
   - {fileID: 179186988}
+  - {fileID: 800767896}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1002,6 +1003,34 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 674179251}
   m_CullTransparentMesh: 0
+--- !u!1 &800767895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800767896}
+  m_Layer: 0
+  m_Name: FloorSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &800767896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 800767895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 463271743}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &869933565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1604,8 @@ MonoBehaviour:
   buttonOffset: 700
   init2ButtonOffset: 100
   init3ButtonOffset: 50
+  path: {fileID: 1567007493366518, guid: bf121070015b141e4bbcc03fb1dbf3d4, type: 2}
+  pathLocation: {fileID: 800767896}
   hintText: {fileID: 215117754}
   item: {fileID: 1092560760921532, guid: 82dc411e6bf05fb45823ac0e68e6f74a, type: 2}
   itemInfo: {fileID: 372926027}
@@ -1598,7 +1629,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1738337364}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b59edbd6542404fb2bd3296492610c34, type: 3}
   m_Name: 

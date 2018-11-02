@@ -13,6 +13,8 @@ public class AdventureGame : MonoBehaviour {
     public float buttonOffset;
     public float init2ButtonOffset;
     public float init3ButtonOffset;
+    public GameObject path;
+    public Transform pathLocation;
     public Text hintText;
     public GameObject item;
     public GameObject itemInfo;
@@ -89,6 +91,9 @@ public class AdventureGame : MonoBehaviour {
             buttons.Add(answer);
         }
 
+        GameObject floor = Instantiate(path);
+        floor.transform.position = player.transform.position;
+        floor.transform.rotation = player.transform.rotation;
     }
 
     public State GetState()

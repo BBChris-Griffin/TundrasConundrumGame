@@ -33,16 +33,23 @@ public class CreateRoom : MonoBehaviour {
 	{
         try
         {
-            if (rootState != null)
+            if (rootState == victoryState || rootState == failState)
+            {
+                Instantiate(path, currPosition, Quaternion.identity);
+                return;
+            }
+            else
             {
                 Instantiate(path, currPosition, Quaternion.identity);
             }
+
+            currPosition = currPosition + new Vector3(0, 0, -1);
+            LevelOrderSearch(rootState.GetNextState()[0], currPosition);
+            LevelOrderSearch(rootState.GetNextState()[1], currPosition);
         }
         catch
         {
             return;
         }
-		LevelOrderSearch(rootState.GetNextState()[0], currPosition + new Vector3(0, 1, 0));
-		LevelOrderSearch(rootState.GetNextState()[1], currPosition + new Vector3(0, 1, 0));
 	}
 }
