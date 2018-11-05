@@ -8,6 +8,7 @@ public class AdventureGame : MonoBehaviour {
     [SerializeField] Text textComponent;
     public State startingState;
     public State failState;
+    public State victoryState;
     public GameObject answerButton;
     public GameObject startPoint;
     public float buttonOffset;
@@ -17,6 +18,7 @@ public class AdventureGame : MonoBehaviour {
     public Transform pathLocation;
     public Text hintText;
     public GameObject item;
+    public GameObject iceFlake;
     public GameObject itemInfo;
     public GameObject player;
 
@@ -91,9 +93,9 @@ public class AdventureGame : MonoBehaviour {
             buttons.Add(answer);
         }
 
-        GameObject floor = Instantiate(path);
-        floor.transform.position = player.transform.position;
-        floor.transform.rotation = player.transform.rotation;
+        //GameObject floor = Instantiate(path);
+        //floor.transform.position = player.transform.position;
+        //floor.transform.LookAt(player.transform);
     }
 
     public State GetState()
@@ -134,7 +136,14 @@ public class AdventureGame : MonoBehaviour {
 
     public void CreateItem()
     {
-        GameObject newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
+        if(currState != victoryState)
+        {
+            GameObject newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
+        }
+        else
+        {
+            GameObject newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
+        }
         //newItem.transform.parent = player.transform;
         //newItem.transform.rotation = Quaternion.Euler(new Vector3(0.0f, item.transform.rotation.y + player.transform.rotation.y, 45f));
     }

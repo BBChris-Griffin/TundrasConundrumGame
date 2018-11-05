@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\HintClick.cs" />
     <Compile Include="Assets\Scripts\ItemObtained.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ReturnToMiddle.cs" />
     <Compile Include="Assets\Scripts\State.cs" />
     <None Include="Assets\Scripts\FirstStateofAdventure.txt" />
     <Reference Include="UnityEditor.StandardEvents">

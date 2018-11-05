@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed;
     public float walkingTime;
+    public float rotationSpeed;
     private Rigidbody rgb;
     private AdventureGame game;
     private int currDirection; // 0 - forward, 1 - right, 2 - back, 3 - left
@@ -33,28 +34,30 @@ public class PlayerController : MonoBehaviour {
     private IEnumerator WalkThePlayer(int direction)
     {
         currDirection += direction;
+        Quaternion rotation = transform.rotation;
 
-        if (currDirection % 4 == 1)
+        if (currDirection % 4 == 1 || currDirection % 4 == -3)
         {
             rgb.velocity = Vector3.right * speed;
-            transform.rotation = Quaternion.LookRotation(Vector3.right);
+            //transform.rotation = Quaternion.LookRotation(Vector3.right);
+            transform.rotation = Quaternion.Slerp(rotation, Quaternion.Euler(rotation.x, rotation.y + 90, rotation.z), rotationSpeed);
         }
-        else if (currDirection % 4 == 3)
+        else if (currDirection % 4 == 3 || currDirection % 4 == -1)
         {
             rgb.velocity = Vector3.left * speed;
-            transform.rotation = Quaternion.LookRotation(Vector3.left);
+            transform.rotation = Quaternion.Slerp(rotation, Quaternion.Euler(rotation.x, rotation.y - 90, rotation.z), rotationSpeed);
         }
-        else if (currDirection % 4 == 0)
+        else if (currDirection % 4 == 0 || currDirection % 4 == -2)
         {
             rgb.velocity = Vector3.forward * speed;
-            transform.rotation = Quaternion.LookRotation(Vector3.forward);
+            //transform.rotation = Quaternion.Slerp(rotation, Quaternion.Euler(rotation.x, rotation.y, rotation.z), rotationSpeed);
         }
-        else
+        else if (currDirection % 4 == 2 || currDirection % 4 == -0)
         {
             rgb.velocity = Vector3.back * speed;
-            transform.rotation = Quaternion.LookRotation(Vector3.back);
+            transform.rotation = Quaternion.Slerp(rotation, Quaternion.Euler(rotation.x, rotation.y + -180, rotation.z), rotationSpeed);
         }
-       
+
         yield return new WaitForSeconds(walkingTime);
         rgb.velocity = Vector3.zero;
     }

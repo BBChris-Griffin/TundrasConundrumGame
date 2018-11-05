@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class AnswerClick : MonoBehaviour {
 
     private AdventureGame game;
+    private PlayerController player;
 	public void Click()
     {
         GameObject mainGameObject = GameObject.FindGameObjectWithTag("GameController");
@@ -14,44 +15,53 @@ public class AnswerClick : MonoBehaviour {
             game = mainGameObject.GetComponent<AdventureGame>();
         }
 
-        if(!game.GetState().GetIsTransition())
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
         {
-            if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetCorrectAnswer())
-            {
-                game.setState(game.GetState().GetNextState()[0]);
-                game.SetupText();
-
-                // New Script
-                game.CreateItem();
-            }
-            else
-            {
-                game.setState(game.GetFailState());
-                game.SetupText();
-            }
-
-            game.SetDirection(0);
+            player = playerObject.GetComponent<PlayerController>();
         }
-        else
+
+        if (player.GetComponent<Rigidbody>().velocity == Vector3.zero)
         {
-            if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetAnswers()[0])
+            if (!game.GetState().GetIsTransition())
             {
-                game.setState(game.GetState().GetNextState()[0]);
-                game.SetupText();
+                if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetCorrectAnswer())
+                {
+                    game.setState(game.GetState().GetNextState()[0]);
+                    game.SetupText();
+
+                    // New Script
+                    game.CreateItem();
+                }
+                else
+                {
+                    game.setState(game.GetFailState());
+                    game.SetupText();
+                }
+
+                game.SetDirection(0);
             }
             else
             {
-                game.setState(game.GetState().GetNextState()[1]);
-                game.SetupText();
-            }
+                if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetAnswers()[0])
+                {
+                    game.setState(game.GetState().GetNextState()[0]);
+                    game.SetupText();
+                }
+                else
+                {
+                    game.setState(game.GetState().GetNextState()[1]);
+                    game.SetupText();
+                }
 
-            if(this.gameObject.GetComponentInChildren<Text>().text == "Left")
-            {
-                game.SetDirection(-1);
-            }
-            else if(this.gameObject.GetComponentInChildren<Text>().text == "Right")
-            {
-                game.SetDirection(1);
+                if (this.gameObject.GetComponentInChildren<Text>().text == "Left")
+                {
+                    game.SetDirection(-1);
+                }
+                else if (this.gameObject.GetComponentInChildren<Text>().text == "Right")
+                {
+                    game.SetDirection(1);
+                }
             }
         }
     }
