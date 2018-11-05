@@ -107,6 +107,11 @@ public class AdventureGame : MonoBehaviour {
             answer.transform.position = new Vector3(startPos + (startPoint.transform.position.x + (buttonOffset * i) / currState.GetAnswers().Length),
                 startPoint.transform.position.y, startPoint.transform.position.z);
             answer.GetComponentInChildren<Text>().text = currState.GetAnswers()[i];
+
+            if(currState.GetAnswers()[i] == currState.GetCorrectAnswer())
+            {
+                answer.tag = "CorrectButton";
+            }
             buttons.Add(answer);
         }
 
