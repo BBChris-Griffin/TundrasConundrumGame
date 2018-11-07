@@ -641,6 +641,7 @@ MonoBehaviour:
   speed: 4
   walkingTime: 1.75
   rotationSpeed: 2
+  turnTime: 3
 --- !u!4 &463271743
 Transform:
   m_ObjectHideFlags: 0
