@@ -142,6 +142,7 @@ public class AdventureGame : MonoBehaviour {
         }
         else
         {
+            Debug.Log("Here");
             GameObject newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
         }
         //newItem.transform.parent = player.transform;

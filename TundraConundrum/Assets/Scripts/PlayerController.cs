@@ -42,28 +42,28 @@ public class PlayerController : MonoBehaviour {
 
         while(timer > 0.0f)
         {
-        if (currDirection % 4 == 1 || currDirection % 4 == -3)
-        {
+          if (currDirection % 4 == 1 || currDirection % 4 == -3)
+          {
             walkTowards = Vector3.right;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotation.x, rotation.y + 90, rotation.z), rotationSpeed);
-        }
-        else if (currDirection % 4 == 3 || currDirection % 4 == -1)
-        {
+          }
+          else if (currDirection % 4 == 3 || currDirection % 4 == -1)
+          {
             walkTowards = Vector3.left;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotation.x, rotation.y - 90, rotation.z), rotationSpeed);
-        }
-        else if (currDirection % 4 == 0 || currDirection % 4 == -2)
-        {
+          }
+          else if (currDirection % 4 == 0 || currDirection % 4 == -2)
+          {
             walkTowards = Vector3.forward;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotation.x, rotation.y, rotation.z), rotationSpeed);
-        }
-        else if (currDirection % 4 == 2 || currDirection % 4 == -0)
-        {
+          }
+          else if (currDirection % 4 == 2 || currDirection % 4 == -0)
+          {
             walkTowards = Vector3.back;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotation.x, rotation.y + -180, rotation.z), rotationSpeed);
+          }
+          timer -= Time.deltaTime;
         }
-        timer -= Time.deltaTime;
-      }
         //yield return new WaitForSeconds(turnTime);
 
         rgb.velocity = walkTowards * speed;
