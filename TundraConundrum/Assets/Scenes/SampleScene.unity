@@ -639,9 +639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  walkingTime: 1.75
+  walkingTime: 1.85
   rotationSpeed: 2
-  turnTime: 3
+  turnTime: 0.5
 --- !u!4 &463271743
 Transform:
   m_ObjectHideFlags: 0
