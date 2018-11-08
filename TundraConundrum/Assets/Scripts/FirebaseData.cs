@@ -17,11 +17,14 @@ public class FirebaseData : MonoBehaviour {
     private bool set;
     private string firebaseID;
     private bool ready;
+    private bool gameFinished;
+    private AdventureGame game;
 
     // Use this for initialization
     void Awake () {
         ready = false;
         set = false;
+        gameFinished = false;
         firebaseID = "https://tundrasconundrum-6af20.firebaseio.com";
         puzzleStates = new List<State>();
         startState = new State();
@@ -30,6 +33,15 @@ public class FirebaseData : MonoBehaviour {
             GetData(roomID);
             ready = true;
         }
+    }
+
+    void Start()
+    {
+      GameObject advGameObject = GameObject.FindGameObjectWithTag("GameController");
+      if(advGameObject != null)
+      {
+        game = advGameObject.GetComponent<AdventureGame>();
+      }
     }
 
     // Update is called once per frame
@@ -42,6 +54,12 @@ public class FirebaseData : MonoBehaviour {
                 GetData(roomID);
                 set = false;
                 ready = true;
+            }
+
+            if(game.RoomComplete() && !gameFinished)
+            {
+              SetData();
+              gameFinished = true;
             }
         }
     }
@@ -66,6 +84,20 @@ public class FirebaseData : MonoBehaviour {
         user.GetValue("print=pretty");
         user.OnGetSuccess -= GetDataHandler;
 
+    }
+
+    void SetData()
+    {
+      Firebase firebase = Firebase.CreateNew(firebaseID, "");
+      Firebase user = firebase.Child("rooms").Child(roomID);
+
+      user.OnUpdateSuccess += UpdateOKHandler;
+      user.OnUpdateSuccess -= UpdateOKHandler;
+    }
+
+    void UpdateOKHandler(Firebase sender, DataSnapshot snapshot)
+    {
+        
     }
 
     void GetDataHandler(Firebase sender, DataSnapshot snapshot)
@@ -109,7 +141,7 @@ public class FirebaseData : MonoBehaviour {
         for (int i = 0; i < puzzleStates.Count; i++)
         {
             puzzleDict = (Dictionary<string, object>)saveDict[puzzleStates[i].GetID()];
-    
+
             // Get Questions
             puzzleStates[i].SetStoryText(puzzleDict["question"].ToString());
 
@@ -156,7 +188,7 @@ public class FirebaseData : MonoBehaviour {
             }
             puzzleStates[i].SetHints(hints.ToArray());
             hints.Clear();
-            
+
             //Get Transitions
             foreach (string key in puzzleDict.Keys)
             {

@@ -82,7 +82,7 @@ public class AdventureGame : MonoBehaviour {
         }
 
         float startPos = 0.0f;
-        
+
         if(currState.GetAnswers().Length == 2)
         {
             startPos = init2ButtonOffset;
@@ -152,6 +152,18 @@ public class AdventureGame : MonoBehaviour {
       else
       {
           currentHint++;
+      }
+    }
+
+    public bool RoomComplete()
+    {
+      if(currState == victoryState)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
       }
     }
 
