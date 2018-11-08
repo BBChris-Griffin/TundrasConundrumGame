@@ -19,9 +19,11 @@ public class FirebaseData : MonoBehaviour {
     private bool ready;
     private bool gameFinished;
     private AdventureGame game;
+    private int count;
 
     // Use this for initialization
     void Awake () {
+        count = 0;
         ready = false;
         set = false;
         gameFinished = false;
@@ -97,7 +99,7 @@ public class FirebaseData : MonoBehaviour {
 
     void UpdateOKHandler(Firebase sender, DataSnapshot snapshot)
     {
-        
+        //sender.UpdateValue("FinishCount", )
     }
 
     void GetDataHandler(Firebase sender, DataSnapshot snapshot)
@@ -111,6 +113,16 @@ public class FirebaseData : MonoBehaviour {
         // Get Room Name
         string roomName = dict["name"].ToString();
         startState.SetRoomTitle(roomName);
+
+        // Get Count Keys
+        foreach (string key in dict.Keys)
+        {
+            if(key == "FinishCount")
+            {
+                count = (int) dict[key];
+            }
+        }
+        count++;
         // Get Puzzle ID
         try
         {
