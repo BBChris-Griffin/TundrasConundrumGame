@@ -18,6 +18,7 @@ public class FirebaseData : MonoBehaviour {
     private string firebaseID;
     private bool ready;
     private bool gameFinished;
+    private int count;
     private AdventureGame game;
 
     // Use this for initialization
@@ -58,8 +59,8 @@ public class FirebaseData : MonoBehaviour {
 
             if(game.RoomComplete() && !gameFinished)
             {
-              SetData();
-              gameFinished = true;
+                GetCountData();
+                gameFinished = true;
             }
         }
     }
@@ -86,7 +87,7 @@ public class FirebaseData : MonoBehaviour {
 
     }
 
-    void SetData()
+    void GetCountData()
     {
       Firebase firebase = Firebase.CreateNew(firebaseID, "");
       Firebase user = firebase.Child("rooms").Child(roomID);
@@ -97,7 +98,10 @@ public class FirebaseData : MonoBehaviour {
 
     void UpdateOKHandler(Firebase sender, DataSnapshot snapshot)
     {
-        
+        count++;
+        FirebaseParam firebaseParam = new FirebaseParam();
+        firebaseParam.Add("FinishCount", count);
+        sender.UpdateValue("FinishCount", firebaseParam);
     }
 
     void GetDataHandler(Firebase sender, DataSnapshot snapshot)
@@ -107,6 +111,15 @@ public class FirebaseData : MonoBehaviour {
 
         dict = (Dictionary<string, object>) dict["rooms"];
         dict = (Dictionary<string, object>)dict[roomID];
+
+        count = 0;
+        foreach (string key in dict.Keys)
+        {
+            if (key == "FinishCount")
+            {
+                count = (int)dict[key];
+            }
+        }
 
         // Get Room Name
         string roomName = dict["name"].ToString();
