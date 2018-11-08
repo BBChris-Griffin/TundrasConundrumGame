@@ -136,16 +136,16 @@ public class AdventureGame : MonoBehaviour {
 
     public void CreateItem()
     {
+        GameObject newItem;
         if(currState != victoryState)
         {
-            GameObject newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
+            newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
         }
         else
         {
-            Debug.Log("Here");
-            GameObject newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
+            newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
         }
-        //newItem.transform.parent = player.transform;
+        newItem.transform.parent = player.transform;
         //newItem.transform.rotation = Quaternion.Euler(new Vector3(0.0f, item.transform.rotation.y + player.transform.rotation.y, 45f));
     }
 
