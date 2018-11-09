@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AdventureGame : MonoBehaviour {
+public class AdventureGame : MonoBehaviour
+{
 
     [SerializeField] Text roomTitle;
     [SerializeField] Text textComponent;
@@ -25,7 +26,7 @@ public class AdventureGame : MonoBehaviour {
     private int currentHint;
     private bool firebaseUsed;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         currentHint = 0;
         firebaseUsed = false;
@@ -37,19 +38,19 @@ public class AdventureGame : MonoBehaviour {
         SetupText();
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
         CheckForFirebaseState();
-        if(currState.GetHints().Length != 0)
+        if (currState.GetHints().Length != 0)
         {
-          hintText.text = currState.GetHints()[currentHint];
+            hintText.text = currState.GetHints()[currentHint];
         }
         else
         {
-          hintText.text = "";
+            hintText.text = "";
         }
-	}
+    }
 
     private void CheckForFirebaseState()
     {
@@ -72,9 +73,9 @@ public class AdventureGame : MonoBehaviour {
     {
         textComponent.text = currState.GetStoryText() + "\n\n";
 
-        if(buttons.Count != 0)
+        if (buttons.Count != 0)
         {
-            for(int i = 0; i < buttons.Count; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
                 Destroy(buttons[i]);
             }
@@ -83,7 +84,7 @@ public class AdventureGame : MonoBehaviour {
 
         float startPos = 0.0f;
 
-        if(currState.GetAnswers().Length == 2)
+        if (currState.GetAnswers().Length == 2)
         {
             startPos = init2ButtonOffset;
         }
@@ -108,7 +109,7 @@ public class AdventureGame : MonoBehaviour {
                 startPoint.transform.position.y, startPoint.transform.position.z);
             answer.GetComponentInChildren<Text>().text = currState.GetAnswers()[i];
 
-            if(currState.GetAnswers()[i] == currState.GetCorrectAnswer())
+            if (currState.GetAnswers()[i] == currState.GetCorrectAnswer())
             {
                 answer.tag = "CorrectButton";
             }
@@ -145,26 +146,14 @@ public class AdventureGame : MonoBehaviour {
 
     public void FlipHintMarker()
     {
-      if(currentHint == (currState.GetHints().Length - 1))
-      {
-          currentHint = 0;
-      }
-      else
-      {
-          currentHint++;
-      }
-    }
-
-    public bool RoomComplete()
-    {
-      if(currState == victoryState)
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
+        if (currentHint == (currState.GetHints().Length - 1))
+        {
+            currentHint = 0;
+        }
+        else
+        {
+            currentHint++;
+        }
     }
 
 }

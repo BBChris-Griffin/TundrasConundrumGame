@@ -23,6 +23,7 @@ public class FirebaseData : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+        count = 0;
         ready = false;
         set = false;
         gameFinished = false;
@@ -57,11 +58,11 @@ public class FirebaseData : MonoBehaviour {
                 ready = true;
             }
 
-            if(game.RoomComplete() && !gameFinished)
-            {
-                GetCountData();
-                gameFinished = true;
-            }
+            //if(game.RoomComplete() && !gameFinished)
+            //{
+            //    GetCountData();
+            //    gameFinished = true;
+            //}
         }
     }
 
@@ -89,20 +90,21 @@ public class FirebaseData : MonoBehaviour {
 
     void GetCountData()
     {
-      Firebase firebase = Firebase.CreateNew(firebaseID, "");
-      Firebase user = firebase.Child("rooms").Child(roomID);
+        Firebase firebase = Firebase.CreateNew(firebaseID, "");
+        Firebase user = firebase.Child("rooms");
 
-      user.OnUpdateSuccess += UpdateOKHandler;
-      user.OnUpdateSuccess -= UpdateOKHandler;
+        FirebaseQueue firebaseQueue = new FirebaseQueue(true, 1, 1.0f);
+
+        firebaseQueue.AddQueueUpdate(user.Child(roomID), "{ \"FinishCount\": \" "+ count + "\"}");
     }
 
-    void UpdateOKHandler(Firebase sender, DataSnapshot snapshot)
-    {
-        count++;
-        FirebaseParam firebaseParam = new FirebaseParam();
-        firebaseParam.Add("FinishCount", count);
-        sender.UpdateValue("FinishCount", firebaseParam);
-    }
+    //void UpdateOKHandler(Firebase sender, DataSnapshot snapshot)
+    //{
+    //    count++;
+    //    FirebaseParam firebaseParam = new FirebaseParam();
+    //    firebaseParam.Add("FinishCount", count);
+    //    sender.UpdateValue("FinishCount", firebaseParam);
+    //}
 
     void GetDataHandler(Firebase sender, DataSnapshot snapshot)
     {
@@ -112,18 +114,19 @@ public class FirebaseData : MonoBehaviour {
         dict = (Dictionary<string, object>) dict["rooms"];
         dict = (Dictionary<string, object>)dict[roomID];
 
-        count = 0;
-        foreach (string key in dict.Keys)
-        {
-            if (key == "FinishCount")
-            {
-                count = (int)dict[key];
-            }
-        }
-
         // Get Room Name
         string roomName = dict["name"].ToString();
         startState.SetRoomTitle(roomName);
+
+        // Get Count Keys
+        foreach (string key in dict.Keys)
+        {
+            if(key == "FinishCount")
+            {
+                count = (int) dict[key];
+            }
+        }
+        count++;
         // Get Puzzle ID
         try
         {
