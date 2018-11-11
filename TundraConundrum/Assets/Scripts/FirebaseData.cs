@@ -58,11 +58,11 @@ public class FirebaseData : MonoBehaviour {
                 ready = true;
             }
 
-            //if(game.RoomComplete() && !gameFinished)
-            //{
-            //    GetCountData();
-            //    gameFinished = true;
-            //}
+            if (game.RoomComplete() && !gameFinished)
+            {
+                GetCountData();
+                gameFinished = true;
+            }
         }
     }
 
@@ -94,17 +94,10 @@ public class FirebaseData : MonoBehaviour {
         Firebase user = firebase.Child("rooms");
 
         FirebaseQueue firebaseQueue = new FirebaseQueue(true, 1, 1.0f);
+        count++;
 
         firebaseQueue.AddQueueUpdate(user.Child(roomID), "{ \"FinishCount\": \" "+ count + "\"}");
     }
-
-    //void UpdateOKHandler(Firebase sender, DataSnapshot snapshot)
-    //{
-    //    count++;
-    //    FirebaseParam firebaseParam = new FirebaseParam();
-    //    firebaseParam.Add("FinishCount", count);
-    //    sender.UpdateValue("FinishCount", firebaseParam);
-    //}
 
     void GetDataHandler(Firebase sender, DataSnapshot snapshot)
     {
@@ -126,7 +119,6 @@ public class FirebaseData : MonoBehaviour {
                 count = (int) dict[key];
             }
         }
-        count++;
         // Get Puzzle ID
         try
         {

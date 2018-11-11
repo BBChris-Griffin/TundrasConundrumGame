@@ -156,4 +156,16 @@ public class AdventureGame : MonoBehaviour
         }
     }
 
+    public bool RoomComplete()
+    {
+        if (currState == victoryState)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
