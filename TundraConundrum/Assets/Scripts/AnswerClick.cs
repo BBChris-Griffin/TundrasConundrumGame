@@ -63,6 +63,6 @@ public class AnswerClick : MonoBehaviour {
                     game.SetDirection(1);
                 }
             }
-        }
+        } 
     }
 }

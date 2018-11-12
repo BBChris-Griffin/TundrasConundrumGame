@@ -28,6 +28,7 @@ public class AdventureGame : MonoBehaviour {
     private bool startWalking;
     private int direction; // -1 means left, 0 means forward, 1 means right
     private Quaternion itemRotation;
+    private GameObject newItem;
 
     enum moveDirection { left, right, forward};
 
@@ -136,7 +137,10 @@ public class AdventureGame : MonoBehaviour {
 
     public void CreateItem()
     {
-        GameObject newItem;
+        if(newItem != null)
+        {
+            Destroy(newItem);
+        }
         if(currState != victoryState)
         {
             newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
@@ -158,4 +162,14 @@ public class AdventureGame : MonoBehaviour {
     {
         this.direction = direction;
     }
+
+    //public GameObject GetNewItem()
+    //{
+    //    return newItem;
+    //}
+
+    //public void DestroyNewItem()
+    //{
+    //    Destroy(newItem);
+    //}
 }
