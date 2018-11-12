@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AdventureGame : MonoBehaviour {
+public class AdventureGame : MonoBehaviour
+{
 
+    [SerializeField] Text roomTitle;
     [SerializeField] Text textComponent;
     public State startingState;
+    public State victoryState;
     public State failState;
     public GameObject answerButton;
     public GameObject startPoint;
     public float buttonOffset;
+    public float init1ButtonOffset;
     public float init2ButtonOffset;
     public float init3ButtonOffset;
     public Text hintText;
@@ -19,40 +23,60 @@ public class AdventureGame : MonoBehaviour {
     private State currState;
     private List<GameObject> buttons;
     private bool displayHint;
-
+    private int currentHint;
+    private bool firebaseUsed;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
+        currentHint = 0;
+        firebaseUsed = false;
         buttons = new List<GameObject>();
         displayHint = false;
         hintText.text = "";
+        roomTitle.text = startingState.GetRoomTitle();
         currState = startingState;
         SetupText();
     }
 
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update()
     {
-        if(displayHint)
+        CheckForFirebaseState();
+        if (currState.GetHints().Length != 0)
         {
-            if(currState.GetHints().Length != 0)
-            {
-              hintText.text = currState.GetHints()[0];
-            }
+            hintText.text = currState.GetHints()[currentHint];
         }
         else
         {
-          hintText.text = "";
+            hintText.text = "";
         }
-	  }
+
+    }
+
+    private void CheckForFirebaseState()
+    {
+        if (!firebaseUsed && this.gameObject.GetComponent<FirebaseData>())
+        {
+            FirebaseData firebase = this.gameObject.GetComponent<FirebaseData>();
+            if (firebase.DataRetrieved())
+            {
+                currState = firebase.GetStartState();
+                firebaseUsed = true;
+                victoryState.SetANextState(currState, 0);
+                failState.SetANextState(currState, 0);
+            }
+            roomTitle.text = currState.GetRoomTitle();
+            SetupText();
+        }
+    }
 
     public void SetupText()
     {
         textComponent.text = currState.GetStoryText() + "\n\n";
 
-        if(buttons.Count != 0)
+        if (buttons.Count != 0)
         {
-            for(int i = 0; i < buttons.Count; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
                 Destroy(buttons[i]);
             }
@@ -60,13 +84,23 @@ public class AdventureGame : MonoBehaviour {
         }
 
         float startPos = 0.0f;
-        if(currState.GetAnswers().Length == 2)
+
+        if (currState.GetAnswers().Length == 2)
         {
             startPos = init2ButtonOffset;
         }
         else if (currState.GetAnswers().Length == 3)
         {
             startPos = init3ButtonOffset;
+        }
+        else if (currState.GetAnswers().Length == 1)
+        {
+            startPos = init1ButtonOffset;
+        }
+
+        if (!currState.GetIsTransition())
+        {
+            currState.ShuffleAnswers();
         }
 
         for (int i = 0; i < currState.GetAnswers().Length; i++)
@@ -75,6 +109,11 @@ public class AdventureGame : MonoBehaviour {
             answer.transform.position = new Vector3(startPos + (startPoint.transform.position.x + (buttonOffset * i) / currState.GetAnswers().Length),
                 startPoint.transform.position.y, startPoint.transform.position.z);
             answer.GetComponentInChildren<Text>().text = currState.GetAnswers()[i];
+
+            if (currState.GetAnswers()[i] == currState.GetCorrectAnswer())
+            {
+                answer.tag = "CorrectButton";
+            }
             buttons.Add(answer);
         }
 
@@ -90,6 +129,11 @@ public class AdventureGame : MonoBehaviour {
         return failState;
     }
 
+    public State GetVictoryState()
+    {
+        return victoryState;
+    }
+
     public void setState(State state)
     {
         displayHint = false;
@@ -103,7 +147,26 @@ public class AdventureGame : MonoBehaviour {
 
     public void FlipHintMarker()
     {
-      displayHint = !displayHint;
+        if (currentHint == (currState.GetHints().Length - 1))
+        {
+            currentHint = 0;
+        }
+        else
+        {
+            currentHint++;
+        }
+    }
+
+    public bool RoomComplete()
+    {
+        if (currState == victoryState)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

@@ -1339,6 +1339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12bddbdd70e63f544b9570e966d88e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomTitle: {fileID: 674179253}
   textComponent: {fileID: 382553728}
   startingState: {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}
   failState: {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
