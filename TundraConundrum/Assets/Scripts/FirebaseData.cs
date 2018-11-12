@@ -42,7 +42,7 @@ public class FirebaseData : MonoBehaviour {
       GameObject advGameObject = GameObject.FindGameObjectWithTag("GameController");
       if(advGameObject != null)
       {
-        game = advGameObject.GetComponent<AdventureGame>();
+            game = advGameObject.GetComponent<AdventureGame>();
       }
     }
 
@@ -57,12 +57,13 @@ public class FirebaseData : MonoBehaviour {
                 set = false;
                 ready = true;
             }
+        }
 
-            if (game.RoomComplete() && !gameFinished)
-            {
-                GetCountData();
-                gameFinished = true;
-            }
+        if (game.RoomComplete() && !gameFinished)
+        {
+            Debug.Log("here");
+            GetCountData();
+            gameFinished = true;
         }
     }
 
@@ -96,7 +97,7 @@ public class FirebaseData : MonoBehaviour {
         FirebaseQueue firebaseQueue = new FirebaseQueue(true, 1, 1.0f);
         count++;
 
-        firebaseQueue.AddQueueUpdate(user.Child(roomID), "{ \"FinishCount\": \" "+ count + "\"}");
+        firebaseQueue.AddQueueUpdate(user.Child(roomID), "{ \"finishCount\": \""+ count + "\"}");
     }
 
     void GetDataHandler(Firebase sender, DataSnapshot snapshot)
@@ -114,9 +115,9 @@ public class FirebaseData : MonoBehaviour {
         // Get Count Keys
         foreach (string key in dict.Keys)
         {
-            if(key == "FinishCount")
+            if(key == "finishCount")
             {
-                count = (int) dict[key];
+                count = int.Parse(dict[key].ToString());
             }
         }
         // Get Puzzle ID

@@ -50,6 +50,7 @@ public class AdventureGame : MonoBehaviour
         {
             hintText.text = "";
         }
+
     }
 
     private void CheckForFirebaseState()

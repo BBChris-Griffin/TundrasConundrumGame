@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomID: -LQF56FL_6JI84eyTVmL
-  webBuild: 0
+  webBuild: 1
   blankState: {fileID: 11400000, guid: 55ce5a702eb99c745bd37296b610a70c, type: 2}
 --- !u!1 &1805882693
 GameObject:
