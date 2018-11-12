@@ -207,17 +207,20 @@ public class FirebaseData : MonoBehaviour {
                 }
             }
 
-            if (dict.ContainsKey("left"))
+            //Correct Transition
+            if (dict.ContainsKey("right"))
             {
-                transitions.Add(dict["left"].ToString());
+                transitions.Add(dict["right"].ToString());
             }
             else
             {
                 transitions.Add("null");
             }
-            if (dict.ContainsKey("right"))
+
+            //Wrong Transition
+            if (dict.ContainsKey("left"))
             {
-                transitions.Add(dict["right"].ToString());
+                transitions.Add(dict["left"].ToString());
             }
             else
             {
