@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour {
 
         rgb.velocity = walkTowards * speed;
         yield return new WaitForSeconds(walkingTime);
-        Debug.Log("Called");
         rgb.velocity = Vector3.zero;
         turnSet = false;
     }

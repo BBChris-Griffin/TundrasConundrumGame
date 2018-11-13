@@ -64,12 +64,27 @@
     <Compile Include="Assets\Scripts\AdventureGame.cs" />
     <Compile Include="Assets\Scripts\AnswerClick.cs" />
     <Compile Include="Assets\Scripts\CreateRoom.cs" />
+    <Compile Include="Assets\Scripts\FirebaseData.cs" />
     <Compile Include="Assets\Scripts\HintClick.cs" />
     <Compile Include="Assets\Scripts\ItemObtained.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ReturnToMiddle.cs" />
     <Compile Include="Assets\Scripts\State.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Sample\AutoRotate.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Sample\MoveControl.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Sample\SampleScript.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\DataSnapshot.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\Firebase.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseError.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseManager.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseObserver.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseParam.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseQueue.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseRoot.cs" />
+    <Compile Include="Assets\SimpleFirebaseUnity\Scripts\miniJSON.cs" />
+    <Compile Include="Assets\ViewAnswer.cs" />
     <None Include="Assets\Scripts\FirstStateofAdventure.txt" />
+    <None Include="Assets\SimpleFirebaseUnity\Plugins\Android\AndroidManifest.xml" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/GameProjects/TundrasConundrumGame/TundraConundrum/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

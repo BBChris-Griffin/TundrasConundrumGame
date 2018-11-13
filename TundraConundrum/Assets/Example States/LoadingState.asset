@@ -9,17 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
-  m_Name: NawFamState
+  m_Name: LoadingState
   m_EditorClassIdentifier: 
-  storyText: Naw, fam! Resurrection!
-  roomName: Holy Crap
-  answers:
-  - Resurrection!
-  - Resurrection!
+  storyText: LOADING...........................................................................................................
+  roomName: LOADING
+  answers: []
   correctAnswer: 
-  nextState:
-  - {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}
-  - {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}
-  isTransition: 1
-  hints:
-  - Resurrection!
+  nextState: []
+  isTransition: 0
+  hints: []

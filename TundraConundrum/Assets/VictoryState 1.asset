@@ -9,20 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 382c634df5446c04cbbb324ce0451f28, type: 3}
-  m_Name: A2RightState
+  m_Name: VictoryState 1
   m_EditorClassIdentifier: 
-  storyText: "You run into a great beast. The only way to beat him is with simple
-    math, my guy...\n\nWhat's 2 * 2?\r"
+  storyText: You have completed Tundra's Conundrum. Congratulations!!
   roomName: Holy Crap
   answers:
-  - 1
-  - Dang
-  - 2
-  - 4
-  correctAnswer: 4
+  - Start Over
+  correctAnswer: 
   nextState:
-  - {fileID: 11400000, guid: 879c2359eb575654f9f915537cf55d29, type: 2}
-  - {fileID: 11400000, guid: 93b70ac4c34b01647bbb30ade321f007, type: 2}
-  isTransition: 0
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 457bbdd278bc82747acdea1ee78ea732, type: 2}
+  isTransition: 1
   hints:
-  - Just like adding them
+  - Bet you can't do it again...
