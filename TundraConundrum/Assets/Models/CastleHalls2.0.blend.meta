@@ -28,6 +28,8 @@ ModelImporter:
     100044: Cube_021
     100046: Cube_022
     100048: Cube_023
+    100050: Text
+    100052: Plane
     400000: //RootNode
     400002: Cube_000
     400004: Cube_001
@@ -53,7 +55,11 @@ ModelImporter:
     400044: Cube_021
     400046: Cube_022
     400048: Cube_023
+    400050: Text
+    400052: Plane
     2100000: Material_001
+    2100002: unnamed
+    2100004: Material
     2300000: //RootNode
     2300002: Cube_000
     2300004: Cube_001
@@ -79,6 +85,8 @@ ModelImporter:
     2300044: Cube_021
     2300046: Cube_022
     2300048: Cube_023
+    2300050: Text
+    2300052: Plane
     3300000: //RootNode
     3300002: Cube_000
     3300004: Cube_001
@@ -104,6 +112,8 @@ ModelImporter:
     3300044: Cube_021
     3300046: Cube_022
     3300048: Cube_023
+    3300050: Text
+    3300052: Plane
     4300000: Cube_002
     4300002: Cube_004
     4300004: Cube_003
@@ -128,6 +138,8 @@ ModelImporter:
     4300042: Cube_007
     4300044: Cube_006
     4300046: Cube_005
+    4300048: Text
+    4300050: Plane
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

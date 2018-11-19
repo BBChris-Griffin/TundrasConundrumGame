@@ -82,6 +82,7 @@
     <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseQueue.cs" />
     <Compile Include="Assets\SimpleFirebaseUnity\Scripts\FirebaseRoot.cs" />
     <Compile Include="Assets\SimpleFirebaseUnity\Scripts\miniJSON.cs" />
+    <Compile Include="Assets\Sprites\StareAtPlayer.cs" />
     <Compile Include="Assets\ViewAnswer.cs" />
     <None Include="Assets\Scripts\FirstStateofAdventure.txt" />
     <None Include="Assets\SimpleFirebaseUnity\Plugins\Android\AndroidManifest.xml" />

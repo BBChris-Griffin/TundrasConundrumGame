@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CorrectButton
+  - Tundra
   layers:
   - Default
   - TransparentFX

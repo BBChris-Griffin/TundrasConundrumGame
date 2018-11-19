@@ -13,11 +13,16 @@ public class PlayerController : MonoBehaviour {
     private int currDirection; // 0 - forward, 1 - right, 2 - back, 3 - left
     private Quaternion lookRotation;
     private bool turnSet;
+    private GameObject tundra;
+    private Quaternion currentLook;
+    private bool lookBegan;
 
 	// Use this for initialization
 	void Start () {
         turnSet = false;
         currDirection = 0;
+        tundra = GameObject.FindGameObjectWithTag("Tundra");
+        lookBegan = false;
         GameObject mainGameObject = GameObject.FindGameObjectWithTag("GameController");
         if (mainGameObject != null)
         {
@@ -32,6 +37,23 @@ public class PlayerController : MonoBehaviour {
         {
             StartCoroutine(WalkThePlayer(game.GetDirection()));
             game.StopWalking();
+        }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                if(!lookBegan)
+                {
+                    currentLook = transform.rotation;
+                    lookBegan = true;
+                }
+                StareAtTundra();
+            }
+            else if(Input.GetKeyUp(KeyCode.Space))
+            {
+                transform.rotation = currentLook;
+                lookBegan = false;
+            }
         }
 
         if(turnSet)
@@ -71,5 +93,10 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(walkingTime);
         rgb.velocity = Vector3.zero;
         turnSet = false;
+    }
+
+    private void StareAtTundra()
+    {
+        transform.LookAt(tundra.transform);
     }
 }
