@@ -98,5 +98,6 @@ public class PlayerController : MonoBehaviour {
     private void StareAtTundra()
     {
         transform.LookAt(tundra.transform);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, tundra.transform.rotation, rotationSpeed * Time.deltaTime);
     }
 }
