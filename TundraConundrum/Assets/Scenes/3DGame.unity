@@ -855,7 +855,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58a56aa8d80eee14cb8fb379e18c0789, type: 3}
   m_Name: 
@@ -5805,7 +5805,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30, y: 3, z: 30}
+  m_Size: {x: 32, y: 3, z: 32}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &759586809
 GameObject:
@@ -12673,7 +12673,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 21
+      value: 20.5
       mode: 0
       spread: 0
       speed:
@@ -16559,7 +16559,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1819880407}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.4, y: 2, z: 0.8}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16576,6 +16576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f8cafbc6c7ddb47a274ebd5a52ad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenEffect: {fileID: 2100000, guid: c1c65d46f8ce9e449a1c622ffc384f21, type: 2}
 --- !u!135 &1819880412
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -16586,7 +16587,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 3.6
   m_Center: {x: -0.0000019073486, y: 0.0000009536745, z: 0.047363948}
 --- !u!1 &2002038001
 GameObject:
