@@ -87,7 +87,9 @@ public class AnswerClick : MonoBehaviour
                 //game.SetDirection(0);
 
                 // For Web Build, Really
+                //game.SetDirection(Random.Range(-1, 1));
                 game.SetDirection(Random.Range(-1, 1));
+
             }
             else
             {

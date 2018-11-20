@@ -49,7 +49,6 @@ public class OutOfBounds : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Triggered the Exitted");
 				outOfBounds = true;
     }
 }

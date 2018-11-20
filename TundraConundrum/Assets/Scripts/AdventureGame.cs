@@ -37,6 +37,7 @@ public class AdventureGame : MonoBehaviour
     private GameObject newItem;
     private GameObject tundra;
     private bool death;
+    private string pastCorrectAnswer;
 
     enum moveDirection { left, right, forward};
 
@@ -65,13 +66,21 @@ public class AdventureGame : MonoBehaviour
     void Update()
     {
         CheckForFirebaseState();
-        if (currState.GetHints().Length != 0)
+
+        if(currState == failState)
         {
-            hintText.text = currState.GetHints()[currentHint];
+            hintText.text = "Correct Answer: " + pastCorrectAnswer;
         }
         else
         {
-            hintText.text = "";
+            if (currState.GetHints().Length != 0)
+            {
+                hintText.text = currState.GetHints()[currentHint];
+            }
+            else
+            {
+                hintText.text = "";
+            }
         }
 
         if(currState == failState && !death)
@@ -169,6 +178,7 @@ public class AdventureGame : MonoBehaviour
 
     public void setState(State state)
     {
+        pastCorrectAnswer = currState.GetCorrectAnswer();
         displayHint = false;
         currState = state;
     }
