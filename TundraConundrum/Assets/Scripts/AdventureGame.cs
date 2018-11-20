@@ -24,6 +24,9 @@ public class AdventureGame : MonoBehaviour
     public GameObject iceFlake;
     public GameObject itemInfo;
     public GameObject player;
+    public Transform tundraSpawn;
+    public float tundraDescentSpeed;
+    public float tundraDescentTime;
 
     private State currState;
     private List<GameObject> buttons;
@@ -32,6 +35,8 @@ public class AdventureGame : MonoBehaviour
     private int direction; // -1 means left, 0 means forward, 1 means right
     private Quaternion itemRotation;
     private GameObject newItem;
+    private GameObject tundra;
+    private bool death;
 
     enum moveDirection { left, right, forward};
 
@@ -40,6 +45,7 @@ public class AdventureGame : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        death = false;
         itemRotation = item.transform.rotation;
         direction = 0;
         startWalking = false;
@@ -50,6 +56,8 @@ public class AdventureGame : MonoBehaviour
         hintText.text = "";
         roomTitle.text = startingState.GetRoomTitle();
         currState = startingState;
+
+        tundra = GameObject.FindGameObjectWithTag("Tundra");
         SetupText();
     }
 
@@ -64,6 +72,12 @@ public class AdventureGame : MonoBehaviour
         else
         {
             hintText.text = "";
+        }
+
+        if(currState == failState && !death)
+        {
+            StartCoroutine(DeathAnimation());
+            death = true;
         }
 
     }
@@ -224,6 +238,22 @@ public class AdventureGame : MonoBehaviour
     public void SetDirection(int direction)
     {
         this.direction = direction;
+    }
+
+    private IEnumerator DeathAnimation()
+    {
+        Light eye = GameObject.FindGameObjectWithTag("LeftEye").GetComponent<Light>();
+        eye.color = Color.red;
+        eye = GameObject.FindGameObjectWithTag("RightEye").GetComponent<Light>();
+        eye.color = Color.red;
+
+        tundra.transform.position = tundraSpawn.position;
+
+        //tundra.GetComponent<Rigidbody>().velocity = Vector3.down * tundraDescentSpeed;
+        Vector3 velocity = tundra.GetComponent<Rigidbody>().velocity;
+        tundra.GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, -tundraDescentSpeed, velocity.z);
+        yield return new WaitForSeconds(tundraDescentTime);
+        tundra.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
     //public GameObject GetNewItem()

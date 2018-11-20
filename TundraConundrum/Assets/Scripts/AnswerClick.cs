@@ -50,7 +50,7 @@ public class AnswerClick : MonoBehaviour
         //}
 
         /////////////////////////////////////////////////////////////////////////
-        if (player.GetComponent<Rigidbody>().velocity == Vector3.zero)
+        if (player.GetComponent<Rigidbody>().velocity == Vector3.zero && !player.GetTurnSet())
         {
             if (!game.GetState().GetIsTransition())
             {

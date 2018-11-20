@@ -7,7 +7,7 @@ public class StareAtPlayer : MonoBehaviour {
     private GameObject player;
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("MainCamera");
 	}
 	
 	// Update is called once per frame

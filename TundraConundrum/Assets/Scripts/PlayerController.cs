@@ -100,4 +100,9 @@ public class PlayerController : MonoBehaviour {
         transform.LookAt(tundra.transform);
         //transform.rotation = Quaternion.Slerp(transform.rotation, tundra.transform.rotation, rotationSpeed * Time.deltaTime);
     }
+
+    public bool GetTurnSet()
+    {
+        return turnSet;
+    }
 }
