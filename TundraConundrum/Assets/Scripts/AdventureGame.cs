@@ -37,6 +37,7 @@ public class AdventureGame : MonoBehaviour
     private GameObject newItem;
     private GameObject tundra;
     private bool death;
+    private bool failure;
     private string pastCorrectAnswer;
 
     enum moveDirection { left, right, forward};
@@ -47,6 +48,7 @@ public class AdventureGame : MonoBehaviour
     void Start()
     {
         death = false;
+        failure = false;
         itemRotation = item.transform.rotation;
         direction = 0;
         startWalking = false;
@@ -85,7 +87,8 @@ public class AdventureGame : MonoBehaviour
 
         if(currState == failState && !death)
         {
-            StartCoroutine(DeathAnimation());
+            Death();
+            //StartCoroutine(DeathAnimation());
             death = true;
         }
 
@@ -264,6 +267,23 @@ public class AdventureGame : MonoBehaviour
         tundra.GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, -tundraDescentSpeed, velocity.z);
         yield return new WaitForSeconds(tundraDescentTime);
         tundra.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
+    private void Death()
+    {
+        Light eye = GameObject.FindGameObjectWithTag("LeftEye").GetComponent<Light>();
+        eye.color = Color.red;
+        eye = GameObject.FindGameObjectWithTag("RightEye").GetComponent<Light>();
+        eye.color = Color.red;
+
+        //tundra.transform.position = tundraSpawn.position;
+        failure = true;
+
+    }
+
+    public bool Failure()
+    {
+      return failure;
     }
 
     //public GameObject GetNewItem()

@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+
+        if(game.Failure())
+        {
+            StareAtTundra();
+        }
         if (game.StartWalking())
         {
             StartCoroutine(WalkThePlayer(game.GetDirection()));
