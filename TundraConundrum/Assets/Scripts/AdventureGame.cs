@@ -113,7 +113,10 @@ public class AdventureGame : MonoBehaviour
 
     public void SetupText()
     {
-        startWalking = true;
+        if(currState != failState && currState != victoryState)
+        {
+            startWalking = true;
+        }
         textComponent.text = currState.GetStoryText() + "\n\n";
 
         if (buttons.Count != 0)
@@ -279,6 +282,16 @@ public class AdventureGame : MonoBehaviour
         //tundra.transform.position = tundraSpawn.position;
         failure = true;
 
+    }
+
+    public bool Victory()
+    {
+        if(currState == victoryState)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public bool Failure()

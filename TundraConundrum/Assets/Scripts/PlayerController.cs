@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     public float walkingTime;
     public float rotationSpeed;
     public float turnTime;
+    public float flyTime;
+    public float flySpeed;
     private Rigidbody rgb;
     private AdventureGame game;
     private int currDirection; // 0 - forward, 1 - right, 2 - back, 3 - left
@@ -16,12 +18,14 @@ public class PlayerController : MonoBehaviour {
     private GameObject tundra;
     private Quaternion currentLook;
     private bool lookBegan;
+    private GameObject lightDoor;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         turnSet = false;
         currDirection = 0;
         tundra = GameObject.FindGameObjectWithTag("Tundra");
+        lightDoor = GameObject.FindGameObjectWithTag("Door To The Light");
         lookBegan = false;
         GameObject mainGameObject = GameObject.FindGameObjectWithTag("GameController");
         if (mainGameObject != null)
@@ -37,6 +41,11 @@ public class PlayerController : MonoBehaviour {
         if(game.Failure())
         {
             StareAtTundra();
+        }
+        else if(game.Victory())
+        {
+            Debug.Log("Victory");
+            StartCoroutine(Victory());
         }
         if (game.StartWalking())
         {
@@ -104,6 +113,14 @@ public class PlayerController : MonoBehaviour {
     {
         transform.LookAt(tundra.transform);
         //transform.rotation = Quaternion.Slerp(transform.rotation, tundra.transform.rotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private IEnumerator Victory()
+    {
+        lightDoor.transform.parent = null;
+        transform.eulerAngles.Set(Vector3.up.x, Vector3.up.y, Vector3.up.z);
+        rgb.velocity = Vector3.up * flySpeed;
+        yield return new WaitForSeconds(flyTime);
     }
 
     public bool GetTurnSet()
