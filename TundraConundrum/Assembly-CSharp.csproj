@@ -61,20 +61,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Laser\laserScript.cs" />
     <Compile Include="Assets\Scripts\AdventureGame.cs" />
     <Compile Include="Assets\Scripts\AnswerClick.cs" />
     <Compile Include="Assets\Scripts\CreateRoom.cs" />
     <Compile Include="Assets\Scripts\CustomImageEffect.cs" />
+    <Compile Include="Assets\Scripts\DeathText.cs" />
     <Compile Include="Assets\Scripts\FirebaseData.cs" />
+    <Compile Include="Assets\Scripts\GlobalVariables.cs" />
     <Compile Include="Assets\Scripts\HintClick.cs" />
     <Compile Include="Assets\Scripts\ItemObtained.cs" />
     <Compile Include="Assets\Scripts\OutOfBounds.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\RandomBGMusic.cs" />
+    <Compile Include="Assets\Scripts\ResetGame.cs" />
     <Compile Include="Assets\Scripts\ReturnToMiddle.cs" />
     <Compile Include="Assets\Scripts\StareAtPlayer.cs" />
     <Compile Include="Assets\Scripts\State.cs" />
     <Compile Include="Assets\Scripts\StepIntoTheLight.cs" />
+    <Compile Include="Assets\Scripts\SuccessText.cs" />
     <Compile Include="Assets\Scripts\ViewAnswer.cs" />
     <Compile Include="Assets\SimpleFirebaseUnity\Sample\AutoRotate.cs" />
     <Compile Include="Assets\SimpleFirebaseUnity\Sample\MoveControl.cs" />

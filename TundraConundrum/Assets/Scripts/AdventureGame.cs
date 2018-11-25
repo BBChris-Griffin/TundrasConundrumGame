@@ -27,6 +27,9 @@ public class AdventureGame : MonoBehaviour
     public Transform tundraSpawn;
     public float tundraDescentSpeed;
     public float tundraDescentTime;
+    public GameObject winUI;
+    public GameObject failUI;
+
 
     private State currState;
     private List<GameObject> buttons;
@@ -39,6 +42,7 @@ public class AdventureGame : MonoBehaviour
     private bool death;
     private bool failure;
     private string pastCorrectAnswer;
+    private bool blastFinished;
 
     enum moveDirection { left, right, forward};
 
@@ -49,6 +53,7 @@ public class AdventureGame : MonoBehaviour
     {
         death = false;
         failure = false;
+        blastFinished = false;
         itemRotation = item.transform.rotation;
         direction = 0;
         startWalking = false;
@@ -60,6 +65,8 @@ public class AdventureGame : MonoBehaviour
         roomTitle.text = startingState.GetRoomTitle();
         currState = startingState;
 
+        winUI.SetActive(false);
+        failUI.SetActive(false);
         tundra = GameObject.FindGameObjectWithTag("Tundra");
         SetupText();
     }
@@ -90,6 +97,12 @@ public class AdventureGame : MonoBehaviour
             Death();
             //StartCoroutine(DeathAnimation());
             death = true;
+            StartCoroutine(FailCredits());
+        }
+
+        if (blastFinished)
+        {
+            failUI.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(failUI.GetComponent<CanvasGroup>().alpha, 1f, 0.1f);
         }
 
     }
@@ -238,10 +251,10 @@ public class AdventureGame : MonoBehaviour
         {
             newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
         }
-        else
-        {
-            newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
-        }
+        //else
+        //{
+        //    newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
+        //}
         newItem.transform.parent = player.transform;
         //newItem.transform.rotation = Quaternion.Euler(new Vector3(0.0f, item.transform.rotation.y + player.transform.rotation.y, 45f));
     }
@@ -299,6 +312,22 @@ public class AdventureGame : MonoBehaviour
       return failure;
     }
 
+    public string GetOldAnswer()
+    {
+        return pastCorrectAnswer;
+    }
+
+    private IEnumerator FailCredits()
+    {
+        yield return new WaitForSeconds(3f);
+        failUI.SetActive(true);
+        blastFinished = true;
+    }
+
+    public string GetRoomTitle()
+    {
+        return roomTitle.text;
+    }
     //public GameObject GetNewItem()
     //{
     //    return newItem;

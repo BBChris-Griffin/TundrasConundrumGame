@@ -8,6 +8,7 @@ public class AnswerClick : MonoBehaviour
 
     private AdventureGame game;
     private PlayerController player;
+    private GameObject item;
     public void Click()
     {
         GameObject mainGameObject = GameObject.FindGameObjectWithTag("GameController");
@@ -49,6 +50,11 @@ public class AnswerClick : MonoBehaviour
         //    }
         //}
 
+        item = GameObject.FindGameObjectWithTag("Key");
+        if(item != null)
+        {
+            Destroy(item);
+        }
         /////////////////////////////////////////////////////////////////////////
         if (player.GetComponent<Rigidbody>().velocity == Vector3.zero && !player.GetTurnSet())
         {
@@ -87,7 +93,6 @@ public class AnswerClick : MonoBehaviour
                 //game.SetDirection(0);
 
                 // For Web Build, Really
-                //game.SetDirection(Random.Range(-1, 1));
                 game.SetDirection(Random.Range(-1, 1));
 
             }

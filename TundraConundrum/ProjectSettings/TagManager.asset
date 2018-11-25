@@ -9,6 +9,10 @@ TagManager:
   - LeftEye
   - RightEye
   - Door To The Light
+  - GameUI
+  - Death Text
+  - Success Text
+  - Key
   layers:
   - Default
   - TransparentFX

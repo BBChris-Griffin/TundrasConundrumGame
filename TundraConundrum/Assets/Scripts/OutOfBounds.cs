@@ -9,6 +9,7 @@ public class OutOfBounds : MonoBehaviour {
 	private bool outOfBounds;
 	private bool descent;
 	private float magValue;
+    private AdventureGame game;
 	// Use this for initialization
 	void Start ()
 	{
@@ -16,7 +17,12 @@ public class OutOfBounds : MonoBehaviour {
 			descent = false;
 			magValue = 0.0f;
 			screenEffect.SetFloat("_Magnitude", 0.0f);
-	}
+        GameObject mainGameObject = GameObject.FindGameObjectWithTag("GameController");
+        if (mainGameObject != null)
+        {
+            game = mainGameObject.GetComponent<AdventureGame>();
+        }
+    }
 
 	// Update is called once per frame
 	void Update ()
@@ -49,6 +55,9 @@ public class OutOfBounds : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-				outOfBounds = true;
+        if(!game.Victory() && other.tag == "Player")
+        {
+            outOfBounds = true;
+        }
     }
 }

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float turnTime;
     public float flyTime;
     public float flySpeed;
+    private Vector3 walkTowards;
     private Rigidbody rgb;
     private AdventureGame game;
     private int currDirection; // 0 - forward, 1 - right, 2 - back, 3 - left
@@ -19,20 +20,25 @@ public class PlayerController : MonoBehaviour {
     private Quaternion currentLook;
     private bool lookBegan;
     private GameObject lightDoor;
+    private bool victory;
+    private GameObject gameUI;
 
     // Use this for initialization
     void Start () {
         turnSet = false;
         currDirection = 0;
+        victory = false;
         tundra = GameObject.FindGameObjectWithTag("Tundra");
         lightDoor = GameObject.FindGameObjectWithTag("Door To The Light");
         lookBegan = false;
+        gameUI = GameObject.FindGameObjectWithTag("GameUI");
         GameObject mainGameObject = GameObject.FindGameObjectWithTag("GameController");
         if (mainGameObject != null)
         {
             game = mainGameObject.GetComponent<AdventureGame>();
         }
         rgb = GetComponent<Rigidbody>();
+        walkTowards = Vector3.zero;
     }
 
     private void Update()
@@ -42,12 +48,13 @@ public class PlayerController : MonoBehaviour {
         {
             StareAtTundra();
         }
-        else if(game.Victory())
+        else if(game.Victory() && !victory)
         {
-            Debug.Log("Victory");
+            gameUI.SetActive(false);
+            victory = true;
             StartCoroutine(Victory());
         }
-        if (game.StartWalking())
+        else if (game.StartWalking())
         {
             StartCoroutine(WalkThePlayer(game.GetDirection()));
             game.StopWalking();
@@ -72,7 +79,11 @@ public class PlayerController : MonoBehaviour {
 
         if(turnSet)
         {
-          transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+            //if(game.Victory())
+            //{
+            //    lightDoor.transform.parent = null;
+            //}
         }
     }
 
@@ -80,7 +91,7 @@ public class PlayerController : MonoBehaviour {
     {
         currDirection += direction;
         Quaternion rotation = transform.rotation;
-        Vector3 walkTowards = Vector3.zero;
+        walkTowards = Vector3.zero;
 
           if (currDirection % 4 == 1 || currDirection % 4 == -3)
           {
@@ -117,10 +128,16 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator Victory()
     {
+        //Vector3 up = new Vector3(-90.0f, transform.rotation.y, transform.rotation.z);
+        //lookRotation = Quaternion.LookRotation(Vector3.up);
+        //turnSet = true;
         lightDoor.transform.parent = null;
-        transform.eulerAngles.Set(Vector3.up.x, Vector3.up.y, Vector3.up.z);
+        tundra.SetActive(false);
+        transform.Rotate(-90.0f, transform.rotation.y, transform.rotation.z);
         rgb.velocity = Vector3.up * flySpeed;
         yield return new WaitForSeconds(flyTime);
+        turnSet = false;
+
     }
 
     public bool GetTurnSet()
