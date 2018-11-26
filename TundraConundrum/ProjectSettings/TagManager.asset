@@ -13,6 +13,7 @@ TagManager:
   - Death Text
   - Success Text
   - Key
+  - Intro Screen
   layers:
   - Default
   - TransparentFX

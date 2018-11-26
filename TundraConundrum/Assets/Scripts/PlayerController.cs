@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour {
     private GameObject lightDoor;
     private bool victory;
     private GameObject gameUI;
+    private bool walking;
 
     // Use this for initialization
     void Start () {
         turnSet = false;
         currDirection = 0;
         victory = false;
+        walking = false;
         tundra = GameObject.FindGameObjectWithTag("Tundra");
         lightDoor = GameObject.FindGameObjectWithTag("Door To The Light");
         lookBegan = false;
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour {
             {
                 transform.rotation = currentLook;
                 lookBegan = false;
+                gameUI.SetActive(true);
             }
         }
 
@@ -89,6 +92,8 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator WalkThePlayer(int direction)
     {
+        walking = true;
+        gameUI.SetActive(false);
         currDirection += direction;
         Quaternion rotation = transform.rotation;
         walkTowards = Vector3.zero;
@@ -118,11 +123,14 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(walkingTime);
         rgb.velocity = Vector3.zero;
         turnSet = false;
+        walking = false;
+        gameUI.SetActive(true);
     }
 
     private void StareAtTundra()
     {
         transform.LookAt(tundra.transform);
+        gameUI.SetActive(false);
         //transform.rotation = Quaternion.Slerp(transform.rotation, tundra.transform.rotation, rotationSpeed * Time.deltaTime);
     }
 
@@ -143,5 +151,10 @@ public class PlayerController : MonoBehaviour {
     public bool GetTurnSet()
     {
         return turnSet;
+    }
+
+    public bool IsWalking()
+    {
+        return walking;
     }
 }

@@ -7,6 +7,7 @@ public class StareAtPlayer : MonoBehaviour {
     public float jawSpeed;
     public float dropTime;
     public ParticleSystem beam;
+    public Transform spawn;
     private GameObject player;
     private AdventureGame game;
     private bool gameOver;
@@ -42,6 +43,7 @@ public class StareAtPlayer : MonoBehaviour {
     IEnumerator Attack()
     {
         gameUI.SetActive(false);
+        transform.position = spawn.position;
         GameObject jaw = transform.GetChild(0).gameObject;
         jaw.GetComponent<Rigidbody>().velocity = Vector3.down * jawSpeed;
         audio.Play();

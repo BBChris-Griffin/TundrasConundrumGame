@@ -29,6 +29,7 @@ public class AdventureGame : MonoBehaviour
     public float tundraDescentTime;
     public GameObject winUI;
     public GameObject failUI;
+    public GameObject introScreen;
 
 
     private State currState;
@@ -43,6 +44,7 @@ public class AdventureGame : MonoBehaviour
     private bool failure;
     private string pastCorrectAnswer;
     private bool blastFinished;
+    private bool firstMove;
 
     enum moveDirection { left, right, forward};
 
@@ -51,9 +53,11 @@ public class AdventureGame : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        introScreen.SetActive(true);
         death = false;
         failure = false;
         blastFinished = false;
+        firstMove = true;
         itemRotation = item.transform.rotation;
         direction = 0;
         startWalking = false;
@@ -121,12 +125,16 @@ public class AdventureGame : MonoBehaviour
             }
             roomTitle.text = currState.GetRoomTitle();
             SetupText();
+            if(firebaseUsed)
+            {
+                firstMove = false;
+            }
         }
     }
 
     public void SetupText()
     {
-        if(currState != failState && currState != victoryState)
+        if(currState != failState && currState != victoryState /*&& !firstMove*/)
         {
             startWalking = true;
         }
@@ -250,12 +258,13 @@ public class AdventureGame : MonoBehaviour
         if(currState != victoryState)
         {
             newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
+            newItem.transform.parent = player.transform;
         }
         //else
         //{
         //    newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
         //}
-        newItem.transform.parent = player.transform;
+
         //newItem.transform.rotation = Quaternion.Euler(new Vector3(0.0f, item.transform.rotation.y + player.transform.rotation.y, 45f));
     }
 

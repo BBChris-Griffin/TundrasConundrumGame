@@ -56,7 +56,7 @@ public class AnswerClick : MonoBehaviour
             Destroy(item);
         }
         /////////////////////////////////////////////////////////////////////////
-        if (player.GetComponent<Rigidbody>().velocity == Vector3.zero && !player.GetTurnSet())
+        if (!player.IsWalking())
         {
             if (!game.GetState().GetIsTransition())
             {

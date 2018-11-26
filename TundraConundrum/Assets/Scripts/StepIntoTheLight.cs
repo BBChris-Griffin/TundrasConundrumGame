@@ -7,10 +7,12 @@ public class StepIntoTheLight : MonoBehaviour {
     public GameObject winUI;
     private AdventureGame game;
     private GameObject player;
+    private AudioSource audio;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
+            audio.Play();
             winUI.SetActive(true);
         }
     }
@@ -23,6 +25,7 @@ public class StepIntoTheLight : MonoBehaviour {
         {
             game = mainGameObject.GetComponent<AdventureGame>();
         }
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
