@@ -24,6 +24,10 @@ public class FirebaseData : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+        if(GlobalVariables.reset)
+        {
+            roomID = GlobalVariables.savedRoomID;
+        }
         count = 0;
         ready = false;
         set = false;
@@ -55,7 +59,7 @@ public class FirebaseData : MonoBehaviour {
         {
             if (set && !GlobalVariables.reset)
             {
-                GetData(GlobalVariables.savedRoomID);
+                GetData(roomID);
                 Console.WriteLine("Actual ID on 1nd build " + roomID);
                 Console.WriteLine("Saved ID on 1nd build " + GlobalVariables.savedRoomID);
                 set = false;
