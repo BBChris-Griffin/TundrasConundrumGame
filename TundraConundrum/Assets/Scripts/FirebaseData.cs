@@ -24,7 +24,7 @@ public class FirebaseData : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        if(GlobalVariables.reset)
+        if(GlobalVariables.reset && webBuild)
         {
             roomID = GlobalVariables.savedRoomID;
         }
