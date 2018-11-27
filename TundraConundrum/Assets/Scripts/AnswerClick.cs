@@ -23,33 +23,6 @@ public class AnswerClick : MonoBehaviour
             player = playerObject.GetComponent<PlayerController>();
         }
 
-        //if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetCorrectAnswer())
-        //{
-        //    if (game.GetState().GetNextState()[0] == game.GetState())
-        //    {
-        //        game.setState(game.GetVictoryState());
-        //        game.SetupText();
-        //    }
-        //    else
-        //    {
-        //        game.setState(game.GetState().GetNextState()[0]);
-        //        game.SetupText();
-        //    }
-        //}
-        //else
-        //{
-        //    if (game.GetState().GetNextState()[1] == game.GetState())
-        //    {
-        //        game.setState(game.GetFailState());
-        //        game.SetupText();
-        //    }
-        //    else
-        //    {
-        //        game.setState(game.GetState().GetNextState()[1]);
-        //        game.SetupText();
-        //    }
-        //}
-
         item = GameObject.FindGameObjectWithTag("Key");
         if(item != null)
         {
@@ -74,7 +47,7 @@ public class AnswerClick : MonoBehaviour
                     }
 
                     // New Script
-                    game.CreateItem();
+                    game.CreateItem(true);
                 }
                 else
                 {
@@ -88,6 +61,9 @@ public class AnswerClick : MonoBehaviour
                         game.setState(game.GetState().GetNextState()[1]);
                         game.SetupText();
                     }
+
+                    game.CreateItem(false);
+
                 }
 
                 //game.SetDirection(0);

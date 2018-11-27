@@ -21,8 +21,9 @@ public class AdventureGame : MonoBehaviour
     public Transform pathLocation;
     public Text hintText;
     public GameObject item;
-    public GameObject iceFlake;
+    public GameObject itemL;
     public GameObject itemInfo;
+    public GameObject itemInfoL;
     public GameObject player;
     public Transform tundraSpawn;
     public float tundraDescentSpeed;
@@ -249,16 +250,25 @@ public class AdventureGame : MonoBehaviour
         startWalking = false;
     }
 
-    public void CreateItem()
+    public void CreateItem(bool correct)
     {
         if(newItem != null)
         {
             Destroy(newItem);
         }
-        if(currState != victoryState)
+        if(currState != victoryState && currState != failState)
         {
-            newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
-            newItem.transform.parent = player.transform;
+            if(correct)
+            {
+                newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
+                newItem.transform.parent = player.transform;
+            }
+            else
+            {
+                newItem = Instantiate(itemL, itemInfoL.transform.position, itemL.transform.rotation);
+                newItem.transform.parent = player.transform;
+            }
+
         }
         //else
         //{
