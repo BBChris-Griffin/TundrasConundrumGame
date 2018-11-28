@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     private bool victory;
     private GameObject gameUI;
     private bool walking;
+    private AudioSource audio;
 
     // Use this for initialization
     void Start () {
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour {
             game = mainGameObject.GetComponent<AdventureGame>();
         }
         rgb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
         walkTowards = Vector3.zero;
     }
 
@@ -139,6 +141,7 @@ public class PlayerController : MonoBehaviour {
         //Vector3 up = new Vector3(-90.0f, transform.rotation.y, transform.rotation.z);
         //lookRotation = Quaternion.LookRotation(Vector3.up);
         //turnSet = true;
+        audio.Play();
         lightDoor.transform.parent = null;
         tundra.SetActive(false);
         transform.Rotate(-90.0f, transform.rotation.y, transform.rotation.z);
