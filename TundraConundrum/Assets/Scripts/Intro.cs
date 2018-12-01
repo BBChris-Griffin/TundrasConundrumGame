@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Intro : MonoBehaviour {
 
+    public Text text;
+    public string[] introTexts;
     private bool fade;
 	// Use this for initialization
 	void Start () {
         fade = false;
+        text.text = introTexts[Random.Range(0, introTexts.Length)];
         StartCoroutine(showOff());
 	}
 	

@@ -10772,6 +10772,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fc657d4bb9b09409ad6cca6186c4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 1120415421}
+  introTexts:
+  - IT HAS BEGUN
+  - DON'T LOOK UP
+  - ICE TO SEE YOU
+  - NEVER LOOK BACK
+  - I'LL BE WATCHING
+  - EVERYBODY FLOATS DOWN HERE
+  - ESCAPE IS A FALLACY
+  - YOU'RE NOT ALONE
+  - THE LIGHT AWAITS
+  - WALK TO THE LIGHT
+  - I'M STRONGER THAN I APPEAR
+  - YOUR MIND IS YOUR POWER
+  - DON'T LEAVE ME
+  - SAVE US
+  - BRUTE STRENGTH SOLVED NOTHING
 --- !u!225 &561182407
 CanvasGroup:
   m_ObjectHideFlags: 0
