@@ -60,15 +60,11 @@ public class FirebaseData : MonoBehaviour {
             if (set && !GlobalVariables.reset)
             {
                 GetData(roomID);
-                Console.WriteLine("Actual ID on 1nd build " + roomID);
-                Console.WriteLine("Saved ID on 1nd build " + GlobalVariables.savedRoomID);
                 set = false;
                 ready = true;
             }
             else if(!set && GlobalVariables.reset)
             {
-                Console.WriteLine("Getting data from right place");
-                Console.WriteLine("ID on 2nd build " + GlobalVariables.savedRoomID);
                 GetData(GlobalVariables.savedRoomID);
                 set = true;
                 ready = true;
