@@ -11,6 +11,7 @@ public class AdventureGame : MonoBehaviour
     public State startingState;
     public State failState;
     public State victoryState;
+    public State blankState;
     public GameObject answerButton;
     public GameObject startPoint;
     public float buttonOffset;
@@ -139,6 +140,7 @@ public class AdventureGame : MonoBehaviour
         {
             startWalking = true;
         }
+        
         textComponent.text = currState.GetStoryText() + "\n\n";
 
         if (buttons.Count != 0)
@@ -182,6 +184,11 @@ public class AdventureGame : MonoBehaviour
                 answer.tag = "CorrectButton";
             }
             buttons.Add(answer);
+
+            if(currState == blankState)
+            {
+                buttons[i].GetComponent<Button>().interactable = false;
+            }
         }
 
         //GameObject floor = Instantiate(path);

@@ -26820,6 +26820,7 @@ MonoBehaviour:
   startingState: {fileID: 11400000, guid: c762c6b066a4a684e9f4a245b0707f0f, type: 2}
   failState: {fileID: 11400000, guid: cc196ba0b432be948b3ceeed727a05ce, type: 2}
   victoryState: {fileID: 11400000, guid: 1eee4e5f9d9a34145bbd5072ca9b9153, type: 2}
+  blankState: {fileID: 11400000, guid: 55ce5a702eb99c745bd37296b610a70c, type: 2}
   answerButton: {fileID: 1109579865485802, guid: feea3991866caa8498c5274440ba7df8,
     type: 2}
   startPoint: {fileID: 1064885587}
