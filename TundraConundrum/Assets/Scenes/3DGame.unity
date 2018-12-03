@@ -15720,9 +15720,21 @@ BoxCollider:
   m_GameObject: {fileID: 740051412}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 32, y: 17, z: 32}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &740051417
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 740051412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 16
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &759586809
 GameObject:
@@ -26866,7 +26878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b57d358ff037d4a9d06939382317b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomID: -LQ4n4jRxisVq1nfPhK8
+  roomID: -LSm8-XpjirWLSzHKHBt
   webBuild: 0
   blankState: {fileID: 11400000, guid: 55ce5a702eb99c745bd37296b610a70c, type: 2}
 --- !u!82 &1738337369
@@ -27174,7 +27186,7 @@ GameObject:
   - component: {fileID: 1819880411}
   m_Layer: 0
   m_Name: Tele Ring
-  m_TagString: Untagged
+  m_TagString: Tele Ring
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
