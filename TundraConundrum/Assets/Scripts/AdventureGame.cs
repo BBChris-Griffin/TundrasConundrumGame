@@ -9,25 +9,60 @@ public class AdventureGame : MonoBehaviour
     [SerializeField] Text roomTitle;
     [SerializeField] Text textComponent;
     public State startingState;
-    public State victoryState;
     public State failState;
+    public State victoryState;
+    public State blankState;
     public GameObject answerButton;
     public GameObject startPoint;
     public float buttonOffset;
     public float init1ButtonOffset;
     public float init2ButtonOffset;
     public float init3ButtonOffset;
+    public GameObject path;
+    public Transform pathLocation;
     public Text hintText;
+    public GameObject item;
+    public GameObject itemL;
+    public GameObject itemInfo;
+    public GameObject itemInfoL;
+    public GameObject player;
+    public Transform tundraSpawn;
+    public float tundraDescentSpeed;
+    public float tundraDescentTime;
+    public GameObject winUI;
+    public GameObject failUI;
+    public GameObject introScreen;
 
 
     private State currState;
     private List<GameObject> buttons;
     private bool displayHint;
+    private bool startWalking;
+    private int direction; // -1 means left, 0 means forward, 1 means right
+    private Quaternion itemRotation;
+    private GameObject newItem;
+    private GameObject tundra;
+    private bool death;
+    private bool failure;
+    private string pastCorrectAnswer;
+    private bool blastFinished;
+    private bool firstMove;
+
+    enum moveDirection { left, right, forward};
+
     private int currentHint;
     private bool firebaseUsed;
     // Use this for initialization
     void Start()
     {
+        introScreen.SetActive(true);
+        death = false;
+        failure = false;
+        blastFinished = false;
+        firstMove = true;
+        itemRotation = item.transform.rotation;
+        direction = 0;
+        startWalking = false;
         currentHint = 0;
         firebaseUsed = false;
         buttons = new List<GameObject>();
@@ -35,6 +70,10 @@ public class AdventureGame : MonoBehaviour
         hintText.text = "";
         roomTitle.text = startingState.GetRoomTitle();
         currState = startingState;
+
+        winUI.SetActive(false);
+        failUI.SetActive(false);
+        tundra = GameObject.FindGameObjectWithTag("Tundra");
         SetupText();
     }
 
@@ -42,13 +81,34 @@ public class AdventureGame : MonoBehaviour
     void Update()
     {
         CheckForFirebaseState();
-        if (currState.GetHints().Length != 0)
+
+        if(currState == failState)
         {
-            hintText.text = currState.GetHints()[currentHint];
+            hintText.text = "Correct Answer: " + pastCorrectAnswer;
         }
         else
         {
-            hintText.text = "";
+            if (currState.GetHints().Length != 0)
+            {
+                hintText.text = currState.GetHints()[currentHint];
+            }
+            else
+            {
+                hintText.text = "";
+            }
+        }
+
+        if(currState == failState && !death)
+        {
+            Death();
+            //StartCoroutine(DeathAnimation());
+            death = true;
+            StartCoroutine(FailCredits());
+        }
+
+        if (blastFinished)
+        {
+            failUI.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(failUI.GetComponent<CanvasGroup>().alpha, 1f, 0.1f);
         }
 
     }
@@ -67,11 +127,20 @@ public class AdventureGame : MonoBehaviour
             }
             roomTitle.text = currState.GetRoomTitle();
             SetupText();
+            if(firebaseUsed)
+            {
+                firstMove = false;
+            }
         }
     }
 
     public void SetupText()
     {
+        if(currState != failState && currState != victoryState /*&& !firstMove*/)
+        {
+            startWalking = true;
+        }
+        
         textComponent.text = currState.GetStoryText() + "\n\n";
 
         if (buttons.Count != 0)
@@ -115,8 +184,16 @@ public class AdventureGame : MonoBehaviour
                 answer.tag = "CorrectButton";
             }
             buttons.Add(answer);
+
+            if(currState == blankState)
+            {
+                buttons[i].GetComponent<Button>().interactable = false;
+            }
         }
 
+        //GameObject floor = Instantiate(path);
+        //floor.transform.position = player.transform.position;
+        //floor.transform.LookAt(player.transform);
     }
 
     public State GetState()
@@ -136,6 +213,7 @@ public class AdventureGame : MonoBehaviour
 
     public void setState(State state)
     {
+        pastCorrectAnswer = currState.GetCorrectAnswer();
         displayHint = false;
         currState = state;
     }
@@ -169,4 +247,120 @@ public class AdventureGame : MonoBehaviour
         }
     }
 
+    public bool StartWalking()
+    {
+        return startWalking;
+    }
+
+    public void StopWalking()
+    {
+        startWalking = false;
+    }
+
+    public void CreateItem(bool correct)
+    {
+        if(newItem != null)
+        {
+            Destroy(newItem);
+        }
+        if(currState != victoryState && currState != failState)
+        {
+            if(correct)
+            {
+                newItem = Instantiate(item, itemInfo.transform.position, itemRotation);
+                newItem.transform.parent = player.transform;
+            }
+            else
+            {
+                newItem = Instantiate(itemL, itemInfoL.transform.position, itemL.transform.rotation);
+                newItem.transform.parent = player.transform;
+            }
+
+        }
+        //else
+        //{
+        //    newItem = Instantiate(iceFlake, itemInfo.transform.position, itemRotation);
+        //}
+
+        //newItem.transform.rotation = Quaternion.Euler(new Vector3(0.0f, item.transform.rotation.y + player.transform.rotation.y, 45f));
+    }
+
+    public int GetDirection()
+    {
+        return direction;
+    }
+
+    public void SetDirection(int direction)
+    {
+        this.direction = direction;
+    }
+
+    private IEnumerator DeathAnimation()
+    {
+        Light eye = GameObject.FindGameObjectWithTag("LeftEye").GetComponent<Light>();
+        eye.color = Color.red;
+        eye = GameObject.FindGameObjectWithTag("RightEye").GetComponent<Light>();
+        eye.color = Color.red;
+
+        tundra.transform.position = tundraSpawn.position;
+
+        //tundra.GetComponent<Rigidbody>().velocity = Vector3.down * tundraDescentSpeed;
+        Vector3 velocity = tundra.GetComponent<Rigidbody>().velocity;
+        tundra.GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, -tundraDescentSpeed, velocity.z);
+        yield return new WaitForSeconds(tundraDescentTime);
+        tundra.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
+    private void Death()
+    {
+        Light eye = GameObject.FindGameObjectWithTag("LeftEye").GetComponent<Light>();
+        eye.color = Color.red;
+        eye = GameObject.FindGameObjectWithTag("RightEye").GetComponent<Light>();
+        eye.color = Color.red;
+
+        //tundra.transform.position = tundraSpawn.position;
+        failure = true;
+
+    }
+
+    public bool Victory()
+    {
+        if(currState == victoryState)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool Failure()
+    {
+      return failure;
+    }
+
+    public string GetOldAnswer()
+    {
+        return pastCorrectAnswer;
+    }
+
+    private IEnumerator FailCredits()
+    {
+        yield return new WaitForSeconds(3f);
+        failUI.SetActive(true);
+        blastFinished = true;
+    }
+
+    public string GetRoomTitle()
+    {
+        return roomTitle.text;
+    }
+    //public GameObject GetNewItem()
+    //{
+    //    return newItem;
+    //}
+
+    //public void DestroyNewItem()
+    //{
+    //    Destroy(newItem);
+    //}
 }

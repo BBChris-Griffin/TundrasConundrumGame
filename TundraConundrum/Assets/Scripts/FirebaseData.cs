@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 using SimpleFirebaseUnity;
@@ -23,6 +24,10 @@ public class FirebaseData : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+        if(GlobalVariables.reset && webBuild)
+        {
+            roomID = GlobalVariables.savedRoomID;
+        }
         count = 0;
         ready = false;
         set = false;
@@ -32,6 +37,7 @@ public class FirebaseData : MonoBehaviour {
         startState = new State();
         if(!webBuild)
         {
+            Console.WriteLine("Not a Web Build");
             GetData(roomID);
             ready = true;
         }
@@ -51,17 +57,22 @@ public class FirebaseData : MonoBehaviour {
     {
         if(webBuild)
         {
-            if (set)
+            if (set && !GlobalVariables.reset)
             {
                 GetData(roomID);
                 set = false;
+                ready = true;
+            }
+            else if(!set && GlobalVariables.reset)
+            {
+                GetData(GlobalVariables.savedRoomID);
+                set = true;
                 ready = true;
             }
         }
 
         if (game.RoomComplete() && !gameFinished)
         {
-            Debug.Log("here");
             GetCountData();
             gameFinished = true;
         }
@@ -72,10 +83,11 @@ public class FirebaseData : MonoBehaviour {
         this.firebaseID = firebaseID;
     }
 
-    public void SetRoomID(string roomID)
+    public void SetRoomID(string room)
     {
-        this.roomID = roomID;
+        this.roomID = room;
         set = true;
+        GlobalVariables.savedRoomID = room;
     }
 
     void GetData(string roomID)

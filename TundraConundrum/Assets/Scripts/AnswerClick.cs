@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AnswerClick : MonoBehaviour {
+public class AnswerClick : MonoBehaviour
+{
 
     private AdventureGame game;
-	public void Click()
+    private PlayerController player;
+    private GameObject item;
+    public void Click()
     {
         GameObject mainGameObject = GameObject.FindGameObjectWithTag("GameController");
         if (mainGameObject != null)
@@ -14,26 +17,66 @@ public class AnswerClick : MonoBehaviour {
             game = mainGameObject.GetComponent<AdventureGame>();
         }
 
-        if(!game.GetState().GetIsTransition())
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
         {
-            if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetCorrectAnswer())
+            player = playerObject.GetComponent<PlayerController>();
+        }
+
+        item = GameObject.FindGameObjectWithTag("Key");
+        if(item != null)
+        {
+            Destroy(item);
+        }
+        /////////////////////////////////////////////////////////////////////////
+        if (!player.IsWalking())
+        {
+            if (!game.GetState().GetIsTransition())
             {
-                if(game.GetState().GetNextState()[0] == game.GetState())
+                if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetCorrectAnswer())
                 {
-                    game.setState(game.GetVictoryState());
-                    game.SetupText();
+                    if (game.GetState().GetNextState()[0] == game.GetState())
+                    {
+                        game.setState(game.GetVictoryState());
+                        game.SetupText();
+                    }
+                    else
+                    {
+                        game.setState(game.GetState().GetNextState()[0]);
+                        game.SetupText();
+                    }
+
+                    // New Script
+                    game.CreateItem(true);
                 }
                 else
                 {
-                    game.setState(game.GetState().GetNextState()[0]);
-                    game.SetupText();
-                }            
+                    if (game.GetState().GetNextState()[1] == game.GetState())
+                    {
+                        game.setState(game.GetFailState());
+                        game.SetupText();
+                    }
+                    else
+                    {
+                        game.setState(game.GetState().GetNextState()[1]);
+                        game.SetupText();
+                    }
+
+                    game.CreateItem(false);
+
+                }
+
+                //game.SetDirection(0);
+
+                // For Web Build, Really
+                game.SetDirection(Random.Range(-1, 1));
+
             }
             else
             {
-                if (game.GetState().GetNextState()[1] == game.GetState())
+                if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetAnswers()[0])
                 {
-                    game.setState(game.GetFailState());
+                    game.setState(game.GetState().GetNextState()[0]);
                     game.SetupText();
                 }
                 else
@@ -41,19 +84,15 @@ public class AnswerClick : MonoBehaviour {
                     game.setState(game.GetState().GetNextState()[1]);
                     game.SetupText();
                 }
-            }
-        }
-        else
-        {
-            if (this.gameObject.GetComponentInChildren<Text>().text == game.GetState().GetAnswers()[0])
-            {
-                game.setState(game.GetState().GetNextState()[0]);
-                game.SetupText();
-            }
-            else
-            {
-                game.setState(game.GetState().GetNextState()[1]);
-                game.SetupText();
+
+                if (this.gameObject.GetComponentInChildren<Text>().text == "Left")
+                {
+                    game.SetDirection(-1);
+                }
+                else if (this.gameObject.GetComponentInChildren<Text>().text == "Right")
+                {
+                    game.SetDirection(1);
+                }
             }
         }
     }

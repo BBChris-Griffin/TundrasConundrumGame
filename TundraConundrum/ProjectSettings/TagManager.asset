@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - CorrectButton
+  - Tundra
+  - LeftEye
+  - RightEye
+  - Door To The Light
+  - GameUI
+  - Death Text
+  - Success Text
+  - Key
+  - Intro Screen
+  - Tele Ring
   layers:
   - Default
   - TransparentFX
